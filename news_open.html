@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ЭНСА</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css"
+      integrity="sha512-yHknP1/AwR+yx26cB1y0cjvQUMvEa2PFzt1c9LlS4pRQ5NOTZFWbhBig+X9G9eYW/8m0/4OXNx8pxJ6z57x0dw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css"
+      integrity="sha512-17EgCFERpgZKcm0j0fEq1YCJuyAWdz9KUtv1EjVuaOz8pDnh/0nZxmU6BBXwaaxqoi9PQXnRWqlcDB027hgv9A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="/public/styles.css" />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"
+      integrity="sha512-HGOnQO9+SP1V92SrtZfjqxxtLmVzqZpjFFekvzZVWoiASSQgSr4cw9Kqd2+l8Llp4Gm0G8GIFJ4ddwZilcdb8A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+  </head>
+
+  <!-- Модальное окно -->
+  <div
+    id="overlay"
+    class="overlay fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 backdrop-blur-lg z-50 hidden"
+  ></div>
+  <div id="myModal" class="modal hidden fixed z-50 inset-0 overflow-y-auto">
+    <div class="flex items-center justify-center min-h-screen">
+      <div class="modal-overlay fixed inset-0 bg-black opacity-50"></div>
+      <div
+        class="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded-3xl shadow-lg z-50 overflow-y-auto"
+      >
+        <div class="modal-content py-4 text-center px-6">
+          <div class="flex items-center pb-1 justify-end">
+            <button
+              id="closeButton"
+              class="text-red-500 bg-transparent border-none rounded-full w-6 h-6 flex items-center justify-center"
+            >
+              <svg
+                width="30"
+                height="30"
+                viewBox="0 0 30 30"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12.5379 11.2121C12.1718 10.846 11.5782 10.846 11.2121 11.2121C10.846 11.5782 10.846 12.1718 11.2121 12.5379L13.6742 15L11.2121 17.4621C10.846 17.8281 10.846 18.4218 11.2121 18.7879C11.5782 19.154 12.1718 19.154 12.5379 18.7879L15 16.3259L17.462 18.7879C17.8282 19.154 18.4218 19.154 18.7879 18.7879C19.154 18.4218 19.154 17.8281 18.7879 17.462L16.3258 15L18.7879 12.5379C19.154 12.1718 19.154 11.5782 18.7879 11.2121C18.4218 10.846 17.8282 10.846 17.462 11.2121L15 13.6741L12.5379 11.2121Z"
+                  fill="#FD7C58"
+                />
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M15 1.5625C7.57868 1.5625 1.5625 7.57868 1.5625 15C1.5625 22.4214 7.57868 28.4375 15 28.4375C22.4214 28.4375 28.4375 22.4214 28.4375 15C28.4375 7.57868 22.4214 1.5625 15 1.5625ZM3.4375 15C3.4375 8.61421 8.61421 3.4375 15 3.4375C21.3857 3.4375 26.5625 8.61421 26.5625 15C26.5625 21.3857 21.3857 26.5625 15 26.5625C8.61421 26.5625 3.4375 21.3857 3.4375 15Z"
+                  fill="#FD7C58"
+                />
+              </svg>
+            </button>
+          </div>
+          <div>
+            <p class="text-2xl font-bold text-blue text-center mb-6">
+              Авторизация
+            </p>
+          </div>
+          <form action="#" method="post">
+            <div class="mb-4">
+              <input
+                placeholder="Логин"
+                type="text"
+                id="username"
+                name="username"
+                class="placeholder-current w-full border border-blue rounded-lg px-2 py-2 focus:outline-none"
+              />
+            </div>
+            <div class="mb-4">
+              <input
+                placeholder="Пароль"
+                type="password"
+                id="password"
+                name="password"
+                class="placeholder-current w-full border border-blue rounded-lg px-2 py-2 focus:outline-none"
+              />
+              <p class="text-xs font-bold text-blue text-left mt-3 mb-2">
+                Забыли пароль?
+              </p>
+            </div>
+            <a
+              href="profile.html"
+              class="w-full bg-blue-button text-white px-4 py-2 rounded-lg hover:bg-blue transition duration-300 ease-in-out mb-4 block text-center"
+            >
+              Войти
+            </a>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <body class="mt-20">
+    <!-- Хедер навбар -->
+    <div class="mx-[50px] md:mx-[50px] xl:mx-[150px]">
+      <nav class="flex justify-between items-end">
+        <div class="flex items-center space-x-11">
+          <div
+            class="flex space-x-4 mr-12 md:mb-2 sm:mb-2 lg:mb-2 xl:mb-0 2xl:mb-0"
+          >
+            <img src="accets/logo.svg" alt="Логотип ЭНСА" />
+            <span class="text-2xl font-bold text-blue">ЭНСА</span>
+          </div>
+          <a href="index.html" class="hidden xl:inline text-lg text-blue"
+            >О предприятии</a
+          >
+          <a href="#" class="hidden xl:inline text-lg text-blue">Тарифы</a>
+          <a href="news.html" class="hidden xl:inline text-lg text-blue"
+            >Новости</a
+          >
+          <a href="#" class="hidden xl:inline text-lg text-blue">Контакты</a>
+        </div>
+        <div
+          class="fixed top-0 right-0 h-full bg-white w-64 p-4 shadow-lg transition-opacity duration-300 ease-in-out z-50"
+          id="mobileMenu"
+          style="display: none"
+        >
+          <div class="flex items-center justify-end -mb-5">
+            <button
+              id="closeMenuButton"
+              class="text-red-500 bg-transparent border-none rounded-full w-6 h-6 flex items-center justify-center"
+            >
+              <svg
+                width="30"
+                height="30"
+                viewBox="0 0 30 30"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12.5379 11.2121C12.1718 10.846 11.5782 10.846 11.2121 11.2121C10.846 11.5782 10.846 12.1718 11.2121 12.5379L13.6742 15L11.2121 17.4621C10.846 17.8281 10.846 18.4218 11.2121 18.7879C11.5782 19.154 12.1718 19.154 12.5379 18.7879L15 16.3259L17.462 18.7879C17.8282 19.154 18.4218 19.154 18.7879 18.7879C19.154 18.4218 19.154 17.8281 18.7879 17.462L16.3258 15L18.7879 12.5379C19.154 12.1718 19.154 11.5782 18.7879 11.2121C18.4218 10.846 17.8282 10.846 17.462 11.2121L15 13.6741L12.5379 11.2121Z"
+                  fill="#FD7C58"
+                />
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M15 1.5625C7.57868 1.5625 1.5625 7.57868 1.5625 15C1.5625 22.4214 7.57868 28.4375 15 28.4375C22.4214 28.4375 28.4375 22.4214 28.4375 15C28.4375 7.57868 22.4214 1.5625 15 1.5625ZM3.4375 15C3.4375 8.61421 8.61421 3.4375 15 3.4375C21.3857 3.4375 26.5625 8.61421 26.5625 15C26.5625 21.3857 21.3857 26.5625 15 26.5625C8.61421 26.5625 3.4375 21.3857 3.4375 15Z"
+                  fill="#FD7C58"
+                />
+              </svg>
+            </button>
+          </div>
+          <div class="flex flex-col items-start mt-4">
+            <a
+              href="index.html"
+              class="text-lg text-blue hover:bg-blue-300 py-2 px-4 mb-2 block border-b border-black w-full"
+              >О предприятии</a
+            >
+            <a
+              href="#"
+              class="text-lg text-blue hover:bg-blue-300 py-2 px-4 mb-2 block border-b border-black w-full"
+              >Тарифы</a
+            >
+            <a
+              href="news.html"
+              class="text-lg text-blue hover:bg-blue-300 py-2 px-4 mb-2 block border-b border-black w-full"
+              >Новости</a
+            >
+            <a
+              href="#"
+              class="text-lg text-blue hover:bg-blue-300 py-2 px-4 mb-2 block border-b border-black w-full"
+              >Контакты</a
+            >
+          </div>
+        </div>
+        <div class="flex items-center space-x-4 hidden xl:flex md:hidden">
+          <button
+            id="authButton"
+            class="bg-blue-button hover:bg-blue transition duration-300 ease-in-out text-white px-3 lx:px-4 py-2 rounded-2xl text-lg flex items-center"
+          >
+            <img src="accets/profil.svg" alt="Войти" class="h-6 w-6" />
+            <span class="hidden xl:inline ml-2">Войти в личный кабинет</span>
+          </button>
+          <button
+            class="bg-blue-button hover:bg-blue transition duration-300 ease-in-out text-white px-3 lx:px-4 py-2 rounded-2xl text-lg flex items-center"
+          >
+            <img src="accets/mail.svg" alt="Почта" class="h-6 w-6" />
+          </button>
+        </div>
+
+        <div class="flex items-center space-x-4 mb-1 xl:hidden">
+          <button
+            id="authButton"
+            class="bg-blue-button hover:bg-blue transition duration-300 ease-in-out text-white px-3 py-2 rounded-2xl text-lg flex items-center xl:inline"
+          >
+            <img src="accets/profil.svg" alt="Войти" class="h-6 w-6" />
+            <span class="hidden xl:inline ml-2">Войти в личный кабинет</span>
+          </button>
+          <button
+            class="bg-blue-button hover:bg-blue transition duration-300 ease-in-out text-white px-3 py-2 rounded-2xl text-lg flex items-center xl:inline"
+          >
+            <img src="accets/mail.svg" alt="Почта" class="h-6 w-6" />
+          </button>
+          <button id="menuButton" class="block text-blue text-xl">
+            <svg
+              width="29"
+              height="31"
+              viewBox="0 0 29 31"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect width="29" height="5" rx="2.5" fill="#4170B7" />
+              <rect y="26" width="29" height="5" rx="2.5" fill="#4170B7" />
+              <rect y="13" width="29" height="5" rx="2.5" fill="#4170B7" />
+            </svg>
+          </button>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Картинка -->
+    <div class="mt-32 relative">
+      <div
+        class="rounded-3xl drop-shadow-xl shadow-2xl mx-[150px] flex items-center justify-center"
+      >
+        <img
+          src="accets/image_6.jpg"
+          alt="Изображение"
+          class="object-cover w-full rounded-3xl"
+          style="max-height: 356px !important"
+        />
+      </div>
+    </div>
+
+    <!-- Новость -->
+    <div class="bg-blue-button h-[320px] flex flex-col items-center -mt-40 z-0">
+      <div class="mt-6">
+        <p class="text-center text-white text-lg mt-40 z-40">13.03.2020</p>
+        <h1
+          class="text-center text-white font-bold px-5 mt-2 mb-10 z-40 text-2xl sm:text-2xl md:text-3xl lg:text-3xl xl:text-4xl 2xl:text-4xl"
+        >
+          Тариф на электроэнергию для квартир с электроплитами: как получить
+          льготу?
+        </h1>
+      </div>
+    </div>
+    <div
+      class="grid grid-cols-1 md:grid-cols-1 xl:grid-cols-2 lg:grid-cols-1 xl:gap-60 lg:gap-0 mt-12 mx-[100px] xl:mx-[150px] 2xl:mx-[150px] md:mx-[100px] md:gap-0"
+    >
+      <!-- Левая колонка -->
+      <div class="text-current space-y-5 leading-8 text-lg">
+        <p>
+          Глава государства еще раз поздравил Ильхама Алиева с убедительной
+          победой на президентских выборах. По его словам, итоги голосования
+          являются наглядным свидетельством высокого доверия и всенародной
+          поддержки стратегического курса лидера Азербайджана.
+        </p>
+        <p>
+          "Вы являетесь общепризнанным лидером азербайджанского народа, и именно
+          в этом качестве вас воспринимают на международной арене. Кроме того,
+          мы искренне радуемся исторической победе Азербайджана и восстановлению
+          суверенитета над собственной территорией", – сказал Касым-Жомарт
+          Токаев.
+        </p>
+        <p>
+          Президент особо подчеркнул, что Астана и Баку демонстрируют высокий
+          уровень сотрудничества, развивают новые направления совместной работы.
+        </p>
+        <p>
+          "Только что мы провели детальное обсуждение буквально всех вопросов,
+          связанных с нашим торгово-экономическим, инвестиционным
+          сотрудничеством, взаимодействием на международной арене, и пришли к
+          общим выводам. Это говорит о том, что Казахстан и Азербайджан в
+          действительности являются стратегическими партнерами,
+          государствами-союзниками. Перспективы очень хорошие при том понимании,
+          что правительства будут заниматься реализацией договоренностей,
+          которые будут достигнуты сегодня в форме подписанных документов,
+          соглашений. Уровень сотрудничества и взаимодействия довольно высокий.
+          Я с большой благодарностью принимаю приглашение принять участие в
+          саммите COP29 – это большое историческое достижение азербайджанского
+          государства и его дипломатии.
+          <span class="text-orange underline">Саммит имеет первостепенное</span>
+          значение с точки зрения урегулирования существующих климатических
+          проблем и глобального сотрудничества. Баку, безусловно, справится с
+          этой задачей", – заявил Глава нашего государства.
+        </p>
+        <p>
+          Лидер Казахстана отметил положительную динамику развития
+          торгово-экономических отношений с Азербайджаном.
+        </p>
+      </div>
+      <!-- Правая колонка -->
+      <div class="text-current space-y-5 leading-8 text-lg">
+        <p>
+          "Товарооборот между Казахстаном и Азербайджаном c 2020 года увеличился
+          в пять раз. Конечно, абсолютные цифры, может быть, не столь
+          впечатляющие. Здесь предстоит поработать, но сама динамика не может не
+          вызывать положительные оценки. Наши страны располагают значительным
+          экономическим потенциалом. И я думаю, что следующие успехи не за
+          горами. Действительно, спектр сотрудничества очень широкий, мы сегодня
+          об этом говорили, начиная с транспорта и логистики и заканчивая
+          вопросами цифровизации, не говоря о нефти и газе. Я удовлетворен тем,
+          что мы успешно работаем на международной арене. Наши делегации в
+          Организации Объединенных Наций и других международных организациях
+          успешно взаимодействуют. Я думаю, что эта линия будет продолжена", –
+          подчеркнул Президент Казахстана.
+        </p>
+        <p>
+          По его мнению, укреплению казахско-азербайджанского взаимодействия
+          способствует реализация наших договоренностей в сфере культуры.
+        </p>
+        <div class="mt-0">
+          <div class="flex items-center justify-center">
+            <img
+              src="accets/image_25.png"
+              alt="Изображение"
+              class="object-cover w-740 h-auto"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- КАРУСЕЛЬ -->
+    <div
+      class="relative xl:mx-[150px] 2xl:mx-[150px] md:mx-[100px] mx-[100px] mt-14"
+    >
+      <div class="variable-width">
+        <img class="p-3" src="accets/image_23.png" alt="Meeting 1" />
+        <img class="p-3" src="accets/image_23.png" alt="Meeting 1" />
+        <img class="p-3" src="accets/image_23.png" alt="Meeting 1" />
+        <img class="p-3" src="accets/image_23.png" alt="Meeting 1" />
+        <img class="p-3" src="accets/image_23.png" alt="Meeting 1" />
+      </div>
+      <div class="flex items-center justify-end">
+        <img src="accets/left-arrow.svg" alt="Влево" class="h-7 w-7 prev-btn" />
+        <img
+          src="accets/right-arrow.svg"
+          alt="Вправо"
+          class="h-7 w-7 ml-4 next-btn"
+        />
+      </div>
+
+      <div class="mt-12 flex items-center justify-center">
+        <h1 class="text-3xl text-center text-blue font-bold">Поделиться</h1>
+        <img
+          src="accets/image_26.png"
+          alt="социальные сети"
+          class="ml-1 mb-2"
+        />
+      </div>
+    </div>
+
+    <div class="mt-8 mb-36 flex items-center justify-center">
+      <a
+        href="news.html"
+        class="border border-orange text-text text-lg py-4 px-32 rounded-lg mr-4 hover:bg-orange hover:text-white transition duration-300 ease-in-out"
+      >
+        Все новости
+      </a>
+    </div>
+
+    <!-- Подвал -->
+    <footer
+      class="bg-blue-button w-full flex flex-col items-center justify-center py-10 sm:py-12 md:py-16 lg:py-20 xl:py-24 2xl:py-26"
+    >
+      <div class="flex justify-between items-center w-[78%] max-w-screen-xl">
+        <div class="flex space-x-4 mr-14">
+          <img src="accets/logo.svg" alt="Логотип ЭНСА" />
+          <span class="text-2xl font-bold text-white">ЭНСА</span>
+        </div>
+        <div
+          class="flex items-center space-x-8 hidden sm:hidden md:hidden xl:flex 2xl:flex lg:flex"
+        >
+          <a href="#" class="text-lg text-white">О предприятии</a>
+          <a href="#" class="text-lg text-white">Тарифы</a>
+          <a href="#" class="text-lg text-white">Новости</a>
+          <a href="#" class="text-lg text-white">Контакты</a>
+        </div>
+        <div class="flex space-x-4 items-center">
+          <button
+            id="authButton"
+            class="text-white px-4 py-2 text-lg flex items-center"
+          >
+            <img src="accets/profil.svg" alt="Войти" class="h-6 w-6 mr-4" />
+            <span>Войти</span>
+          </button>
+          <button
+            class="bg-blue-button text-white px-4 py-2 rounded-2xl text-lg flex items-center"
+          >
+            <img src="accets/mail.svg" alt="Почта" class="h-6 w-6 mr-4" />
+            <span>dm.5265@mail.ru</span>
+          </button>
+        </div>
+      </div>
+      <p
+        class="text-white text-base mt-10 mx-16 sm:mx-16 md:mx-20 lg:mx-24 xl:mx-28 2xl:mx-40"
+      >
+        Продолжая использовать наш сайт, Вы даете согласие на обработку файлов
+        Cookies, в соответствии с
+        <a href="" class="underline underline-offset-2"
+          >Политикой конфиденциальности</a
+        >
+        и
+        <a href="" class="underline underline-offset-2"
+          >Согласием на обработку персональных данных</a
+        >
+      </p>
+      <p class="text-white text-base mt-8">@ 2020 Все права защищены.</p>
+    </footer>
+  </body>
+  <script src="script.js"></script>
+</html>

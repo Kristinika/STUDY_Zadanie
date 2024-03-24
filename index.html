@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ЭНСА</title>
+    <link rel="stylesheet" href="/public/styles.css" />
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  </head>
+
+  <!-- Модальное окно -->
+  <div
+    id="overlay"
+    class="overlay fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 backdrop-blur-lg z-50 hidden"
+  ></div>
+  <div id="myModal" class="modal hidden fixed z-50 inset-0 overflow-y-auto">
+    <div class="flex items-center justify-center min-h-screen">
+      <div class="modal-overlay fixed inset-0 bg-black opacity-50"></div>
+      <div
+        class="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded-3xl shadow-lg z-50 overflow-y-auto"
+      >
+        <div class="modal-content py-4 text-center px-6">
+          <div class="flex items-center pb-1 justify-end">
+            <button
+              id="closeButton"
+              class="text-red-500 bg-transparent border-none rounded-full w-6 h-6 flex items-center justify-center"
+            >
+              <svg
+                width="30"
+                height="30"
+                viewBox="0 0 30 30"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12.5379 11.2121C12.1718 10.846 11.5782 10.846 11.2121 11.2121C10.846 11.5782 10.846 12.1718 11.2121 12.5379L13.6742 15L11.2121 17.4621C10.846 17.8281 10.846 18.4218 11.2121 18.7879C11.5782 19.154 12.1718 19.154 12.5379 18.7879L15 16.3259L17.462 18.7879C17.8282 19.154 18.4218 19.154 18.7879 18.7879C19.154 18.4218 19.154 17.8281 18.7879 17.462L16.3258 15L18.7879 12.5379C19.154 12.1718 19.154 11.5782 18.7879 11.2121C18.4218 10.846 17.8282 10.846 17.462 11.2121L15 13.6741L12.5379 11.2121Z"
+                  fill="#FD7C58"
+                />
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M15 1.5625C7.57868 1.5625 1.5625 7.57868 1.5625 15C1.5625 22.4214 7.57868 28.4375 15 28.4375C22.4214 28.4375 28.4375 22.4214 28.4375 15C28.4375 7.57868 22.4214 1.5625 15 1.5625ZM3.4375 15C3.4375 8.61421 8.61421 3.4375 15 3.4375C21.3857 3.4375 26.5625 8.61421 26.5625 15C26.5625 21.3857 21.3857 26.5625 15 26.5625C8.61421 26.5625 3.4375 21.3857 3.4375 15Z"
+                  fill="#FD7C58"
+                />
+              </svg>
+            </button>
+          </div>
+          <div>
+            <p class="text-2xl font-bold text-blue text-center mb-6">
+              Авторизация
+            </p>
+          </div>
+          <form action="#" method="post">
+            <div class="mb-4">
+              <input
+                placeholder="Логин"
+                type="text"
+                id="username"
+                name="username"
+                class="placeholder-current w-full border border-blue rounded-lg px-2 py-2 focus:outline-none"
+              />
+            </div>
+            <div class="mb-4">
+              <input
+                placeholder="Пароль"
+                type="password"
+                id="password"
+                name="password"
+                class="placeholder-current w-full border border-blue rounded-lg px-2 py-2 focus:outline-none"
+              />
+              <p class="text-xs font-bold text-blue text-left mt-3 mb-2">
+                Забыли пароль?
+              </p>
+            </div>
+            <a
+              href="profile.html"
+              class="w-full bg-blue-button text-white px-4 py-2 rounded-lg hover:bg-blue transition duration-300 ease-in-out mb-4 block text-center"
+            >
+              Войти
+            </a>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <body class="mt-20 mb-12">
+    <!-- Хедер навбар -->
+    <div class="mx-[50px] md:mx-[50px] xl:mx-[150px]">
+      <nav class="flex justify-between items-end">
+        <div class="flex items-center space-x-11">
+          <div
+            class="flex space-x-4 mr-12 md:mb-2 sm:mb-2 lg:mb-2 xl:mb-0 2xl:mb-0"
+          >
+            <img src="accets/logo.svg" alt="Логотип ЭНСА" />
+            <span class="text-2xl font-bold text-blue">ЭНСА</span>
+          </div>
+          <a href="index.html" class="hidden xl:inline text-lg text-blue"
+            >О предприятии</a
+          >
+          <a href="#" class="hidden xl:inline text-lg text-blue">Тарифы</a>
+          <a href="news.html" class="hidden xl:inline text-lg text-blue"
+            >Новости</a
+          >
+          <a href="#" class="hidden xl:inline text-lg text-blue">Контакты</a>
+        </div>
+        <div
+          class="fixed top-0 right-0 h-full bg-white w-64 p-4 shadow-lg transition-opacity duration-300 ease-in-out z-50"
+          id="mobileMenu"
+          style="display: none"
+        >
+          <div class="flex items-center justify-end -mb-5">
+            <button
+              id="closeMenuButton"
+              class="text-red-500 bg-transparent border-none rounded-full w-6 h-6 flex items-center justify-center"
+            >
+              <svg
+                width="30"
+                height="30"
+                viewBox="0 0 30 30"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12.5379 11.2121C12.1718 10.846 11.5782 10.846 11.2121 11.2121C10.846 11.5782 10.846 12.1718 11.2121 12.5379L13.6742 15L11.2121 17.4621C10.846 17.8281 10.846 18.4218 11.2121 18.7879C11.5782 19.154 12.1718 19.154 12.5379 18.7879L15 16.3259L17.462 18.7879C17.8282 19.154 18.4218 19.154 18.7879 18.7879C19.154 18.4218 19.154 17.8281 18.7879 17.462L16.3258 15L18.7879 12.5379C19.154 12.1718 19.154 11.5782 18.7879 11.2121C18.4218 10.846 17.8282 10.846 17.462 11.2121L15 13.6741L12.5379 11.2121Z"
+                  fill="#FD7C58"
+                />
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M15 1.5625C7.57868 1.5625 1.5625 7.57868 1.5625 15C1.5625 22.4214 7.57868 28.4375 15 28.4375C22.4214 28.4375 28.4375 22.4214 28.4375 15C28.4375 7.57868 22.4214 1.5625 15 1.5625ZM3.4375 15C3.4375 8.61421 8.61421 3.4375 15 3.4375C21.3857 3.4375 26.5625 8.61421 26.5625 15C26.5625 21.3857 21.3857 26.5625 15 26.5625C8.61421 26.5625 3.4375 21.3857 3.4375 15Z"
+                  fill="#FD7C58"
+                />
+              </svg>
+            </button>
+          </div>
+          <div class="flex flex-col items-start mt-4">
+            <a
+              href="index.html"
+              class="text-lg text-blue hover:bg-blue-300 py-2 px-4 mb-2 block border-b border-black w-full"
+              >О предприятии</a
+            >
+            <a
+              href="#"
+              class="text-lg text-blue hover:bg-blue-300 py-2 px-4 mb-2 block border-b border-black w-full"
+              >Тарифы</a
+            >
+            <a
+              href="news.html"
+              class="text-lg text-blue hover:bg-blue-300 py-2 px-4 mb-2 block border-b border-black w-full"
+              >Новости</a
+            >
+            <a
+              href="#"
+              class="text-lg text-blue hover:bg-blue-300 py-2 px-4 mb-2 block border-b border-black w-full"
+              >Контакты</a
+            >
+          </div>
+        </div>
+        <div class="flex items-center space-x-4 hidden xl:flex md:hidden">
+          <button
+            id="authButton"
+            class="bg-blue-button hover:bg-blue transition duration-300 ease-in-out text-white px-3 lx:px-4 py-2 rounded-2xl text-lg flex items-center"
+          >
+            <img src="accets/profil.svg" alt="Войти" class="h-6 w-6" />
+            <span class="hidden xl:inline ml-2">Войти в личный кабинет</span>
+          </button>
+          <button
+            class="bg-blue-button hover:bg-blue transition duration-300 ease-in-out text-white px-3 lx:px-4 py-2 rounded-2xl text-lg flex items-center"
+          >
+            <img src="accets/mail.svg" alt="Почта" class="h-6 w-6" />
+          </button>
+        </div>
+
+        <div class="flex items-center space-x-4 mb-1 xl:hidden">
+          <button
+            id="authButton"
+            class="bg-blue-button hover:bg-blue transition duration-300 ease-in-out text-white px-3 py-2 rounded-2xl text-lg flex items-center xl:inline"
+          >
+            <img src="accets/profil.svg" alt="Войти" class="h-6 w-6" />
+            <span class="hidden xl:inline ml-2">Войти в личный кабинет</span>
+          </button>
+          <button
+            class="bg-blue-button hover:bg-blue transition duration-300 ease-in-out text-white px-3 py-2 rounded-2xl text-lg flex items-center xl:inline"
+          >
+            <img src="accets/mail.svg" alt="Почта" class="h-6 w-6" />
+          </button>
+          <button id="menuButton" class="block text-blue text-xl">
+            <svg
+              width="29"
+              height="31"
+              viewBox="0 0 29 31"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect width="29" height="5" rx="2.5" fill="#4170B7" />
+              <rect y="26" width="29" height="5" rx="2.5" fill="#4170B7" />
+              <rect y="13" width="29" height="5" rx="2.5" fill="#4170B7" />
+            </svg>
+          </button>
+        </div>
+      </nav>
+    </div>
+    <img
+      src="accets/photo.svg"
+      alt="Фото"
+      class="absolute top-0 right-0 -z-40 hidden 2xl:flex"
+    />
+
+    <!-- Приветственная страница -->
+    <div
+      class="mt-40 md:mt-48 xl:mt-52 text-center md:text-center lg:text-left mx-[50px] md:mx-[50px] xl:mx-[150px]"
+    >
+      <p
+        class="text-2xl text-text truncate whitespace-normal leading-10 md:w-auto lg:max-w-[580px] xl:max-w-[580px]"
+      >
+        Контролируй свои расходы за электроэнергию и исключай возможность
+        воровства
+      </p>
+      <button
+        id="authButton"
+        class="bg-orange border-transparent text-white xl:px-14 xl:py-4 md:px-14 md:py-4 px-10 py-3 rounded-2xl text-xl mt-14 hover:bg-white hover:text-text hover:border-orange border transition duration-300 ease-in-out md:mx-auto"
+      >
+        Присоединиться
+      </button>
+    </div>
+
+    <div
+      class="mt-44 flex justify-center lg:justify-start lg:max-w-[50%] md:w-auto mx-[50px] md:mx-[50px] xl:mx-[150px] space-x-4 xl:space-x-32"
+    >
+      <div class="text-center">
+        <img src="accets/house.svg" alt="Дом" class="h-8 w-8 mx-auto" />
+        <p class="text-blue mt-4">
+          Установка и <br />
+          обслуживание системы
+        </p>
+      </div>
+      <div class="text-center">
+        <img src="accets/pc.svg" alt="Компьютер" class="h-8 w-8 mx-auto" />
+        <p class="text-purple mt-4">
+          Контроль за расходом <br />
+          электроэнергии
+        </p>
+      </div>
+      <div class="text-center">
+        <img src="accets/shield.svg" alt="Щит" class="h-8 w-8 mx-auto" />
+        <p class="text-coral mt-4">
+          Исключение <br />
+          возможности воровства
+        </p>
+      </div>
+    </div>
+
+    <!-- АО "ННПО им. М.В. Фрунзе" -->
+    <div
+      class="flex justify-between mt-44 xl:mt-64 mx-[50px] md:mx-[50px] xl:mx-[150px]"
+    >
+      <div class="grid grid-cols-2 gap-4 mr-0 xl:mr-36">
+        <div class="...">
+          <img
+            src="accets/photo1.jpg"
+            alt="Изображение 1"
+            class="object-cover h-96 w-72 rounded-2xl hidden xl:block"
+          />
+        </div>
+        <div class="...">
+          <img
+            src="accets/photo2.jpg"
+            alt="Изображение 2"
+            class="object-cover h-96 w-72 rounded-2xl hidden xl:block"
+          />
+        </div>
+        <div
+          class="col-start-1 col-end-3 hidden bg-blue-button rounded-2xl h-36 w-full xl:flex items-center justify-center p-4"
+        >
+          <img src="accets/icon.svg" alt="Иконка" class="h-24 w-24" />
+          <p class="text-white ml-8 hidden lg:block 2xl:text-xl xl:text-base">
+            НИЖЕГОРОДСКОЕ <br />
+            НАУЧНО-ПРОИЗВОДСТВЕННОЕ <br />
+            ОБЪЕДИНЕНИЕ им М.В. ФРУНЗЕ
+          </p>
+        </div>
+      </div>
+
+      <div class="text-left">
+        <div class="w-full xl:max-w-[790px]">
+          <h2 class="text-blue text-4xl font-bold mb-16">
+            АО "ННПО им. М.В. Фрунзе"
+          </h2>
+          <p class="text-text text-lg mb-10">
+            Нижегородское научно-производственное объединение имени М.В.Фрунзе –
+            это разработчик и производитель современных высокотехнологичных
+            радиоэлектронных приборов военного и гражданского назначения.
+          </p>
+          <p class="text-text text-lg mb-10">
+            Сертификация системы менеджмента качества предприятия подтверждена
+            сертификатом Системы сертификации «Военный регистр» о соответствии
+            стандартам ГОСТ Р ИСО 9001-2015 и ГОСТ РВ 0015-002-2012.
+          </p>
+          <div class="2xl:flex">
+            <div class="w-full xl:max-w-[400px]">
+              <p class="text-text text-lg mb-14">
+                Лицензия на осуществление деятельности по изготовлению и ремонту
+                средств измерений, выданная Федеральным агентством по
+                техническому регулированию и метрологии.
+              </p>
+              <a
+                href="index.html"
+                class="text-orange text-base underline underline-offset-8"
+                >Перейти на официальный сайт</a
+              >
+            </div>
+            <div class="ml-0 mt-14 2xl:mt-0 2xl:ml-14 flex">
+              <img
+                src="accets/licenzia1.jpg"
+                alt="Лицензия"
+                class="object-cover h-40 w-25 2xl:h-48 2xl:w-full mr-16"
+              />
+              <img
+                src="accets/licenzia2.jpg"
+                alt="Сертификат"
+                class="object-cover h-40 w-25 2xl:h-48 2xl:w-full"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Таблица Тарифы-->
+    <div
+      class="bg-blue-button h-[700px] flex flex-col justify-center items-center mt-36"
+    >
+      <div class="w-full mt-48 z-40">
+        <h1
+          class="text-center text-white text-4xl font-bold mb-5 xl:mb-14 mt-20 xl:mt-0 mx-5 xl:mx-0"
+        >
+          Тарифы на электроэнергию в Архангельской области
+        </h1>
+        <div
+          class="bg-white rounded-3xl drop-shadow-xl shadow-2xl p-5 xl:p-10 mx-[50px] md:mx-[50px] xl:mx-[150px] overflow-x-auto"
+        >
+          <table class="w-full border-collapse">
+            <thead>
+              <tr class="text-center text-text text-base xl:text-lg">
+                <th class="border-b border-gray px-4 py-2" rowspan="2">№</th>
+                <th class="border-l border-gray px-4 py-2" rowspan="2">
+                  Период
+                </th>
+                <th class="border-l border-gray px-4 py-2" rowspan="2">
+                  Одноставочный тариф, кВт.ч
+                </th>
+                <th class="border-l border-gray px-4 py-1" colspan="2">
+                  Дифференцированный тариф по двум зонам суток
+                </th>
+                <th class="border-l border-gray px-4 py-2" rowspan="2">
+                  Документ, устанавливающий тарифы
+                </th>
+              </tr>
+              <tr class="text-center text-text text-sm xl:text-base">
+                <th class="border-l border-gray px-4 py-1 font-normal">
+                  дневная зона (с 7 до 23 часов), кВт.ч
+                </th>
+                <th class="border-l border-gray px-4 py-1 font-normal">
+                  ночная зона (с 23 до 7 часов), кВт.ч
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                class="text-center text-text hover:bg-blue-light text-sm xl:text-base"
+              >
+                <td class="border-y border-gray px-3 py-5">1</td>
+                <td class="border border-gray px-3 py-5">
+                  01.01.20 — 30.06.20
+                </td>
+                <td class="border border-gray px-3 py-5">
+                  4.91 руб за 1 кВт.ч
+                </td>
+                <td class="border border-gray px-3 py-5">
+                  5.65 руб за 1 кВт.ч
+                </td>
+                <td class="border border-gray px-3 py-5">
+                  1.65 руб за 1 кВт.ч
+                </td>
+                <td class="border-y border-gray px-3 py-5 text-left">
+                  <div class="flex justify-between items-center">
+                    <a href="#" class="text-blue underline underline-offset-4">
+                      Постановление от 13 декабря 2019 г. № 81-э/30
+                      <img
+                        src="accets/save.svg"
+                        class="h-4 w-4 ml-3"
+                        style="display: inline"
+                      />
+                    </a>
+                  </div>
+                </td>
+              </tr>
+              <tr
+                class="text-center text-text hover:bg-blue-light text-sm xl:text-base"
+              >
+                <td class="border-y border-gray px-3 py-5">2</td>
+                <td class="border border-gray px-3 py-5">
+                  01.01.20 — 30.06.20
+                </td>
+                <td class="border border-gray px-3 py-5">
+                  4.91 руб за 1 кВт.ч
+                </td>
+                <td class="border border-gray px-3 py-5">
+                  5.65 руб за 1 кВт.ч
+                </td>
+                <td class="border border-gray px-3 py-5">
+                  1.65 руб за 1 кВт.ч
+                </td>
+                <td class="border-y border-gray px-3 py-5 text-left">
+                  <div class="flex justify-between items-center">
+                    <a href="#" class="text-blue underline underline-offset-4">
+                      Постановление от 13 декабря 2019 г. № 81-э/30
+                      <img
+                        src="accets/save.svg"
+                        class="h-4 w-4 ml-3"
+                        style="display: inline"
+                      />
+                    </a>
+                  </div>
+                </td>
+              </tr>
+              <tr
+                class="text-center text-text hover:bg-blue-light text-sm xl:text-base"
+              >
+                <td class="border-y border-gray px-3 py-5">3</td>
+                <td class="border border-gray px-3 py-5">
+                  01.01.20 — 30.06.20
+                </td>
+                <td class="border border-gray px-3 py-5">
+                  4.91 руб за 1 кВт.ч
+                </td>
+                <td class="border border-gray px-3 py-5">
+                  5.65 руб за 1 кВт.ч
+                </td>
+                <td class="border border-gray px-3 py-5">
+                  1.65 руб за 1 кВт.ч
+                </td>
+                <td class="border-y border-gray px-3 py-5 text-left">
+                  <div class="flex justify-between items-center">
+                    <a href="#" class="text-blue underline underline-offset-4">
+                      Постановление от 13 декабря 2019 г. № 81-э/30
+                      <img
+                        src="accets/save.svg"
+                        class="h-4 w-4 ml-3"
+                        style="display: inline"
+                      />
+                    </a>
+                  </div>
+                </td>
+              </tr>
+              <tr
+                class="text-center text-text hover:bg-blue-light text-sm xl:text-base"
+              >
+                <td class="border-y border-gray px-3 py-5">4</td>
+                <td class="border border-gray px-3 py-5">
+                  01.01.20 — 30.06.20
+                </td>
+                <td class="border border-gray px-3 py-5">
+                  4.91 руб за 1 кВт.ч
+                </td>
+                <td class="border border-gray px-3 py-5">
+                  5.65 руб за 1 кВт.ч
+                </td>
+                <td class="border border-gray px-3 py-5">
+                  1.65 руб за 1 кВт.ч
+                </td>
+                <td class="border-y border-gray px-3 py-5 text-left">
+                  <div class="flex justify-between items-center">
+                    <a href="#" class="text-blue underline underline-offset-4">
+                      Постановление от 13 декабря 2019 г. № 81-э/30
+                      <img
+                        src="accets/save.svg"
+                        class="h-4 w-4 ml-3"
+                        style="display: inline"
+                      />
+                    </a>
+                  </div>
+                </td>
+              </tr>
+              <tr
+                class="text-center text-text hover:bg-blue-light text-sm xl:text-base"
+              >
+                <td class="border-y border-gray px-3 py-5">5</td>
+                <td class="border border-gray px-3 py-5">
+                  01.01.20 — 30.06.20
+                </td>
+                <td class="border border-gray px-3 py-5">
+                  4.91 руб за 1 кВт.ч
+                </td>
+                <td class="border border-gray px-3 py-5">
+                  5.65 руб за 1 кВт.ч
+                </td>
+                <td class="border border-gray px-3 py-5">
+                  1.65 руб за 1 кВт.ч
+                </td>
+                <td class="border-y border-gray px-3 py-5 text-left">
+                  <div class="flex justify-between items-center">
+                    <a href="#" class="text-blue underline underline-offset-4">
+                      Постановление от 13 декабря 2019 г. № 81-э/30
+                      <img
+                        src="accets/save.svg"
+                        class="h-4 w-4 ml-3"
+                        style="display: inline"
+                      />
+                    </a>
+                  </div>
+                </td>
+              </tr>
+              <tr
+                class="text-center text-text hover:bg-blue-light text-sm xl:text-base"
+              >
+                <td class="border-t border-gray px-3 py-5">6</td>
+                <td class="border-l border-gray px-3 py-5">
+                  01.01.20 — 30.06.20
+                </td>
+                <td class="border-l border-gray px-3 py-5">
+                  4.91 руб за 1 кВт.ч
+                </td>
+                <td class="border-l border-gray px-3 py-5">
+                  5.65 руб за 1 кВт.ч
+                </td>
+                <td class="border-l border-gray px-3 py-5">
+                  1.65 руб за 1 кВт.ч
+                </td>
+                <td class="border-l border-gray px-3 py-5 text-left">
+                  <div class="flex justify-between items-center">
+                    <a href="#" class="text-blue underline underline-offset-4">
+                      Постановление от 13 декабря 2019 г. № 81-э/30
+                      <img
+                        src="accets/save.svg"
+                        class="h-4 w-4 ml-3"
+                        style="display: inline"
+                      />
+                    </a>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Актуальные новости -->
+    <div
+      class="flex justify-between mt-96 lg:mt-72 mx-[50px] md:mx-[50px] xl:mx-[150px]"
+    >
+      <div class="my-auto mr-24 hidden xl:block">
+        <img
+          src="accets/photo3.jpg"
+          alt="Изображение 1"
+          class="object-cover h-auto w-[580px] rounded-3xl"
+        />
+      </div>
+
+      <div class="text-left">
+        <div class="w-full xl:max-w-[790px]">
+          <h2 class="text-blue text-4xl font-bold mb-24">Актуальные новости</h2>
+          <p class="text-text text-2xl font-bold mb-10">
+            Тариф на электроэнергию для квартир с электроплитами: как получить
+            льготу?
+          </p>
+          <p class="text-text text-lg mb-10">
+            Если плита на кухне электрическая, а не газовая, то тариф на
+            электроэнергию будет ниже на 30%. Это своего рода льгота, которая
+            предоставляется жильцами, чтобы компенсировать им более высокий
+            расход электричества. И вот вопрос: как собственнику квартиры этот
+            самый льготный тариф получить? Давайте разберемся...
+          </p>
+          <div class="flex justify-between items-center">
+            <div>
+              <a
+                class="text-gray text-lg mb-10 italic underline underline-offset-4"
+                href="#"
+              >
+                Подробнее
+                <img
+                  src="accets/arrow.svg"
+                  class="h-5 w-9 ml-3"
+                  style="display: inline"
+                />
+              </a>
+            </div>
+            <div>
+              <span class="text-gray text-lg">13.03.2020</span>
+            </div>
+          </div>
+          <div class="flex justify-between items-center mt-24">
+            <div class="flex items-center">
+              <a
+                href="news.html"
+                class="border border-orange text-text text-lg py-4 sm:px-32 px-12 rounded-lg mr-4 hover:bg-orange hover:text-white transition duration-300 ease-in-out"
+              >
+                Все новости
+              </a>
+            </div>
+            <div class="flex mt-9">
+              <svg
+                class="h-6 w-6 fill-current text-blue transition-colors duration-300 hover:text-blue-button mr-4"
+                viewBox="0 0 35 35"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M35 3.18182V31.8182C35 33.5761 33.5761 35 31.8182 35H3.18182C1.42386 35 0 33.5761 0 31.8182V3.18182C0 1.42387 1.42386 0 3.18182 0H31.8182C33.5761 0 35 1.42386 35 3.18182ZM19.557 6.82977L10.0116 16.3752C9.38955 16.9973 9.38955 18.0027 10.0116 18.6248L19.557 28.1702C19.8673 28.4805 20.2745 28.6364 20.6818 28.6364C21.0891 28.6364 21.4964 28.4805 21.8066 28.1702C22.4286 27.5482 22.4286 26.5427 21.8066 25.9207L13.3859 17.5L21.8066 9.07932C22.4286 8.45728 22.4286 7.45182 21.8066 6.82978C21.1845 6.20773 20.1791 6.20773 19.557 6.82978L19.557 6.82977Z"
+                />
+              </svg>
+              <svg
+                class="h-6 w-6 fill-current text-blue transition-colors duration-300 hover:text-blue-button"
+                viewBox="0 0 35 35"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M0 3.18182V31.8182C0 33.5761 1.42386 35 3.18182 35H31.8182C33.5761 35 35 33.5761 35 31.8182V3.18182C35 1.42387 33.5761 0 31.8182 0H3.18182C1.42387 0 0 1.42386 0 3.18182ZM15.443 6.82977L24.9884 16.3752C25.6105 16.9973 25.6105 18.0027 24.9884 18.6248L15.443 28.1702C15.1327 28.4805 14.7255 28.6364 14.3182 28.6364C13.9109 28.6364 13.5036 28.4805 13.1934 28.1702C12.5714 27.5482 12.5714 26.5427 13.1934 25.9207L21.6141 17.5L13.1934 9.07932C12.5714 8.45728 12.5714 7.45182 13.1934 6.82978C13.8155 6.20773 14.8209 6.20773 15.443 6.82978L15.443 6.82977Z"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-36 relative">
+      <div
+        class="bg-white rounded-3xl drop-shadow-xl shadow-2xl p-16 mx-[50px] md:mx-[50px] xl:mx-[150px] flex flex-col xl:flex-row"
+      >
+        <div class="text-left flex-1">
+          <div class="w-full xl:max-w-[790px]">
+            <h2 class="text-blue text-4xl font-bold mb-14">О компании</h2>
+            <p class="text-text text-lg mb-10">
+              ООО “ЭНСА” ведет установку и обслуживание системы АИИС КУЭ на базе
+              КТС “МАЯК”.
+            </p>
+            <p class="text-text text-lg mb-10">
+              С нашей помощью СНТ, СОТы и любые граждане контролируют свои
+              расходы за электроэнергию и исключают возможность воровства.
+            </p>
+            <p class="text-text text-lg mb-10">
+              На сайте Вы можете получить всю необходимую информацию по
+              потребленной и оплаченной электроэнергии.
+            </p>
+            <p class="text-text text-lg">
+              Чтобы присоединиться или узнать подробности подключения,
+              обратитесь по адресу
+              <a
+                href="#"
+                class="text-orange text-base underline underline-offset-4"
+                >dm.5265@mail.ru</a
+              >
+              или
+              <a
+                href="#"
+                class="text-orange text-base underline underline-offset-4"
+                >оставьте заявку</a
+              >
+              на сайте, и мы свяжемся с Вами.
+            </p>
+          </div>
+        </div>
+        <div class="flex-1 ml-0 xl:ml-10 my-auto mx-auto text-center">
+          <img
+            src="accets/notebook.jpg"
+            alt="Ноутбук"
+            class="object-cover h-[auto] w-[700px] rounded-3xl"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="bg-blue-button h-[350px] flex flex-col items-center -mt-72"
+    ></div>
+
+    <!-- Футер -->
+    <footer
+      class="bg-blue-button w-full flex flex-col items-center justify-center py-10 sm:py-12 md:py-16 lg:py-20 xl:py-24 2xl:py-26"
+    >
+      <div class="flex justify-between items-center w-[78%] max-w-screen-xl">
+        <div class="flex space-x-4 mr-14">
+          <img src="accets/logo.svg" alt="Логотип ЭНСА" />
+          <span class="text-2xl font-bold text-white">ЭНСА</span>
+        </div>
+        <div
+          class="flex items-center space-x-8 hidden sm:hidden md:hidden xl:flex 2xl:flex lg:flex"
+        >
+          <a href="#" class="text-lg text-white">О предприятии</a>
+          <a href="#" class="text-lg text-white">Тарифы</a>
+          <a href="#" class="text-lg text-white">Новости</a>
+          <a href="#" class="text-lg text-white">Контакты</a>
+        </div>
+        <div class="flex space-x-4 items-center">
+          <button
+            id="authButton"
+            class="text-white px-4 py-2 text-lg flex items-center"
+          >
+            <img src="accets/profil.svg" alt="Войти" class="h-6 w-6 mr-4" />
+            <span>Войти</span>
+          </button>
+          <button class="text-white px-4 py-2 text-lg flex items-center">
+            <img src="accets/mail.svg" alt="Почта" class="h-6 w-6 mr-4" />
+            <span>dm.5265@mail.ru</span>
+          </button>
+        </div>
+      </div>
+      <p
+        class="text-white text-base mt-10 mx-16 sm:mx-16 md:mx-20 lg:mx-24 xl:mx-28 2xl:mx-40"
+      >
+        Продолжая использовать наш сайт, Вы даете согласие на обработку файлов
+        Cookies, в соответствии с
+        <a href="" class="underline underline-offset-2"
+          >Политикой конфиденциальности</a
+        >
+        и
+        <a href="" class="underline underline-offset-2"
+          >Согласием на обработку персональных данных</a
+        >
+      </p>
+      <p class="text-white text-base mt-8">@ 2020 Все права защищены.</p>
+    </footer>
+  </body>
+
+  <script src="script.js"></script>
+</html>

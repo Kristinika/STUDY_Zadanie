@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ЭНСА</title>
+    <link rel="stylesheet" href="/public/styles.css" />
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  </head>
+
+  <!-- Модальное окно -->
+  <div
+    id="overlay"
+    class="overlay fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 backdrop-blur-lg z-50 hidden"
+  ></div>
+  <div id="myModal" class="modal hidden fixed z-50 inset-0 overflow-y-auto">
+    <div class="flex items-center justify-center min-h-screen">
+      <div class="modal-overlay fixed inset-0 bg-black opacity-50"></div>
+      <div
+        class="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded-3xl shadow-lg z-50 overflow-y-auto"
+      >
+        <div class="modal-content py-4 text-center px-6">
+          <div class="flex items-center pb-1 justify-end">
+            <button
+              id="closeButton"
+              class="text-red-500 bg-transparent border-none rounded-full w-6 h-6 flex items-center justify-center"
+            >
+              <svg
+                width="30"
+                height="30"
+                viewBox="0 0 30 30"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12.5379 11.2121C12.1718 10.846 11.5782 10.846 11.2121 11.2121C10.846 11.5782 10.846 12.1718 11.2121 12.5379L13.6742 15L11.2121 17.4621C10.846 17.8281 10.846 18.4218 11.2121 18.7879C11.5782 19.154 12.1718 19.154 12.5379 18.7879L15 16.3259L17.462 18.7879C17.8282 19.154 18.4218 19.154 18.7879 18.7879C19.154 18.4218 19.154 17.8281 18.7879 17.462L16.3258 15L18.7879 12.5379C19.154 12.1718 19.154 11.5782 18.7879 11.2121C18.4218 10.846 17.8282 10.846 17.462 11.2121L15 13.6741L12.5379 11.2121Z"
+                  fill="#FD7C58"
+                />
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M15 1.5625C7.57868 1.5625 1.5625 7.57868 1.5625 15C1.5625 22.4214 7.57868 28.4375 15 28.4375C22.4214 28.4375 28.4375 22.4214 28.4375 15C28.4375 7.57868 22.4214 1.5625 15 1.5625ZM3.4375 15C3.4375 8.61421 8.61421 3.4375 15 3.4375C21.3857 3.4375 26.5625 8.61421 26.5625 15C26.5625 21.3857 21.3857 26.5625 15 26.5625C8.61421 26.5625 3.4375 21.3857 3.4375 15Z"
+                  fill="#FD7C58"
+                />
+              </svg>
+            </button>
+          </div>
+          <div>
+            <p class="text-2xl font-bold text-blue text-center mb-6">
+              Авторизация
+            </p>
+          </div>
+          <form action="#" method="post">
+            <div class="mb-4">
+              <input
+                placeholder="Логин"
+                type="text"
+                id="username"
+                name="username"
+                class="placeholder-current w-full border border-blue rounded-lg px-2 py-2 focus:outline-none"
+              />
+            </div>
+            <div class="mb-4">
+              <input
+                placeholder="Пароль"
+                type="password"
+                id="password"
+                name="password"
+                class="placeholder-current w-full border border-blue rounded-lg px-2 py-2 focus:outline-none"
+              />
+              <p class="text-xs font-bold text-blue text-left mt-3 mb-2">
+                Забыли пароль?
+              </p>
+            </div>
+            <a
+              href="profile.html"
+              class="w-full bg-blue-button text-white px-4 py-2 rounded-lg hover:bg-blue transition duration-300 ease-in-out mb-4 block text-center"
+            >
+              Войти
+            </a>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <body class="mt-20">
+    <!-- Хедер навбар -->
+    <div class="mx-[50px] md:mx-[50px] xl:mx-[150px]">
+      <nav class="flex justify-between items-end">
+        <div class="flex items-center space-x-11">
+          <div
+            class="flex space-x-4 mr-12 md:mb-2 sm:mb-2 lg:mb-2 xl:mb-0 2xl:mb-0"
+          >
+            <img src="accets/logo.svg" alt="Логотип ЭНСА" />
+            <span class="text-2xl font-bold text-blue">ЭНСА</span>
+          </div>
+          <a href="index.html" class="hidden xl:inline text-lg text-blue"
+            >О предприятии</a
+          >
+          <a href="#" class="hidden xl:inline text-lg text-blue">Тарифы</a>
+          <a href="news.html" class="hidden xl:inline text-lg text-blue"
+            >Новости</a
+          >
+          <a href="#" class="hidden xl:inline text-lg text-blue">Контакты</a>
+        </div>
+        <div
+          class="fixed top-0 right-0 h-full bg-white w-64 p-4 shadow-lg transition-opacity duration-300 ease-in-out z-50"
+          id="mobileMenu"
+          style="display: none"
+        >
+          <div class="flex items-center justify-end -mb-5">
+            <button
+              id="closeMenuButton"
+              class="text-red-500 bg-transparent border-none rounded-full w-6 h-6 flex items-center justify-center"
+            >
+              <svg
+                width="30"
+                height="30"
+                viewBox="0 0 30 30"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12.5379 11.2121C12.1718 10.846 11.5782 10.846 11.2121 11.2121C10.846 11.5782 10.846 12.1718 11.2121 12.5379L13.6742 15L11.2121 17.4621C10.846 17.8281 10.846 18.4218 11.2121 18.7879C11.5782 19.154 12.1718 19.154 12.5379 18.7879L15 16.3259L17.462 18.7879C17.8282 19.154 18.4218 19.154 18.7879 18.7879C19.154 18.4218 19.154 17.8281 18.7879 17.462L16.3258 15L18.7879 12.5379C19.154 12.1718 19.154 11.5782 18.7879 11.2121C18.4218 10.846 17.8282 10.846 17.462 11.2121L15 13.6741L12.5379 11.2121Z"
+                  fill="#FD7C58"
+                />
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M15 1.5625C7.57868 1.5625 1.5625 7.57868 1.5625 15C1.5625 22.4214 7.57868 28.4375 15 28.4375C22.4214 28.4375 28.4375 22.4214 28.4375 15C28.4375 7.57868 22.4214 1.5625 15 1.5625ZM3.4375 15C3.4375 8.61421 8.61421 3.4375 15 3.4375C21.3857 3.4375 26.5625 8.61421 26.5625 15C26.5625 21.3857 21.3857 26.5625 15 26.5625C8.61421 26.5625 3.4375 21.3857 3.4375 15Z"
+                  fill="#FD7C58"
+                />
+              </svg>
+            </button>
+          </div>
+          <div class="flex flex-col items-start mt-4">
+            <a
+              href="index.html"
+              class="text-lg text-blue hover:bg-blue-300 py-2 px-4 mb-2 block border-b border-black w-full"
+              >О предприятии</a
+            >
+            <a
+              href="#"
+              class="text-lg text-blue hover:bg-blue-300 py-2 px-4 mb-2 block border-b border-black w-full"
+              >Тарифы</a
+            >
+            <a
+              href="news.html"
+              class="text-lg text-blue hover:bg-blue-300 py-2 px-4 mb-2 block border-b border-black w-full"
+              >Новости</a
+            >
+            <a
+              href="#"
+              class="text-lg text-blue hover:bg-blue-300 py-2 px-4 mb-2 block border-b border-black w-full"
+              >Контакты</a
+            >
+          </div>
+        </div>
+        <div class="flex items-center space-x-4 hidden xl:flex md:hidden">
+          <button
+            id="authButton"
+            class="bg-blue-button hover:bg-blue transition duration-300 ease-in-out text-white px-3 lx:px-4 py-2 rounded-2xl text-lg flex items-center"
+          >
+            <img src="accets/profil.svg" alt="Войти" class="h-6 w-6" />
+            <span class="hidden xl:inline ml-2">Войти в личный кабинет</span>
+          </button>
+          <button
+            class="bg-blue-button hover:bg-blue transition duration-300 ease-in-out text-white px-3 lx:px-4 py-2 rounded-2xl text-lg flex items-center"
+          >
+            <img src="accets/mail.svg" alt="Почта" class="h-6 w-6" />
+          </button>
+        </div>
+
+        <div class="flex items-center space-x-4 mb-1 xl:hidden">
+          <button
+            id="authButton"
+            class="bg-blue-button hover:bg-blue transition duration-300 ease-in-out text-white px-3 py-2 rounded-2xl text-lg flex items-center xl:inline"
+          >
+            <img src="accets/profil.svg" alt="Войти" class="h-6 w-6" />
+            <span class="hidden xl:inline ml-2">Войти в личный кабинет</span>
+          </button>
+          <button
+            class="bg-blue-button hover:bg-blue transition duration-300 ease-in-out text-white px-3 py-2 rounded-2xl text-lg flex items-center xl:inline"
+          >
+            <img src="accets/mail.svg" alt="Почта" class="h-6 w-6" />
+          </button>
+          <button id="menuButton" class="block text-blue text-xl">
+            <svg
+              width="29"
+              height="31"
+              viewBox="0 0 29 31"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect width="29" height="5" rx="2.5" fill="#4170B7" />
+              <rect y="26" width="29" height="5" rx="2.5" fill="#4170B7" />
+              <rect y="13" width="29" height="5" rx="2.5" fill="#4170B7" />
+            </svg>
+          </button>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Новости -->
+    <div class="bg-blue-button h-[450px] flex flex-col items-center mt-16">
+      <h2 class="text-white text-4xl font-bold mt-16">Новости</h2>
+    </div>
+
+    <div class="bg-white rounded-3xl mx-[150px] xl:mx-[220px] -mt-72 flex">
+      <div>
+        <img
+          src="accets/photo4.jpg"
+          alt="Фотография"
+          class="object-cover h-[390px] w-[650px] rounded-3xl hidden lg:hiiden xl:flex 2xl:flex"
+        />
+      </div>
+
+      <div class="text-left p-12">
+        <div class="max-w-[950px]">
+          <p
+            class="text-text text-xl sm:text-xl md:text-xl xl:md:text-2xl font-bold mb-10"
+          >
+            Тариф на электроэнергию для квартир с электроплитами: как получить
+            льготу?
+          </p>
+          <p class="text-text 2xl:text-lg xl:text-lg md:text-md mb-10">
+            Если плита на кухне электрическая, а не газовая, то тариф на
+            электроэнергию будет ниже на 30%. Это своего рода льгота, которая
+            предоставляется жильцами, чтобы компенсировать им более высокий
+            расход электричества. И вот вопрос: как собственнику квартиры этот
+            самый льготный тариф получить? Давайте разберемся...
+          </p>
+          <div class="flex justify-between items-center">
+            <div>
+              <a
+                class="text-gray text-lg mb-10 italic underline underline-offset-4"
+                href="news_open.html"
+              >
+                Подробнее
+                <img
+                  src="accets/arrow.svg"
+                  class="h-5 w-9 ml-3"
+                  style="display: inline"
+                />
+              </a>
+            </div>
+            <div>
+              <span class="text-gray text-lg">13.03.2020</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Сетка карточек новостей -->
+    <div
+      class="grid xl:grid-cols-3 2xl:grid-cols-3 lg:grid-cols-1 gap-6 mt-24 mx-[150px] md:grid-cols-1"
+    >
+      <div class="bg-white rounded-2xl border border-gray">
+        <img
+          src="accets/photo4.jpg"
+          alt="Фотография"
+          class="object-cover h-[200px] w-full rounded-t-2xl"
+        />
+        <div class="p-4">
+          <span class="text-gray text-lg">13.03.2020</span>
+          <p class="text-text text-2xl font-bold my-4">
+            Тариф на электроэнергию для квартир с электроплитами: как получить
+            льготу?
+          </p>
+          <a
+            class="text-gray text-lg italic underline underline-offset-4"
+            href="news_open.html"
+            >Подробнее<img
+              src="accets/arrow.svg"
+              class="h-5 w-9 ml-3"
+              style="display: inline"
+          /></a>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl border border-gray">
+        <img
+          src="accets/photo4.jpg"
+          alt="Фотография"
+          class="object-cover h-[200px] w-full rounded-t-2xl"
+        />
+        <div class="p-4">
+          <span class="text-gray text-lg">13.03.2020</span>
+          <p class="text-text text-2xl font-bold my-4">
+            Тариф на электроэнергию для квартир с электроплитами: как получить
+            льготу?
+          </p>
+          <a
+            class="text-gray text-lg italic underline underline-offset-4"
+            href="news_open.html"
+            >Подробнее<img
+              src="accets/arrow.svg"
+              class="h-5 w-9 ml-3"
+              style="display: inline"
+          /></a>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl border border-gray">
+        <img
+          src="accets/photo4.jpg"
+          alt="Фотография"
+          class="object-cover h-[200px] w-full rounded-t-2xl"
+        />
+        <div class="p-4">
+          <span class="text-gray text-lg">13.03.2020</span>
+          <p class="text-text text-2xl font-bold my-4">
+            Тариф на электроэнергию для квартир с электроплитами: как получить
+            льготу?
+          </p>
+          <a
+            class="text-gray text-lg italic underline underline-offset-4"
+            href="news_open.html"
+            >Подробнее<img
+              src="accets/arrow.svg"
+              class="h-5 w-9 ml-3"
+              style="display: inline"
+          /></a>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl border border-gray">
+        <img
+          src="accets/photo4.jpg"
+          alt="Фотография"
+          class="object-cover h-[200px] w-full rounded-t-2xl"
+        />
+        <div class="p-4">
+          <span class="text-gray text-lg">13.03.2020</span>
+          <p class="text-text text-2xl font-bold my-4">
+            Тариф на электроэнергию для квартир с электроплитами: как получить
+            льготу?
+          </p>
+          <a
+            class="text-gray text-lg italic underline underline-offset-4"
+            href="news_open.html"
+            >Подробнее<img
+              src="accets/arrow.svg"
+              class="h-5 w-9 ml-3"
+              style="display: inline"
+          /></a>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl border border-gray">
+        <img
+          src="accets/photo4.jpg"
+          alt="Фотография"
+          class="object-cover h-[200px] w-full rounded-t-2xl"
+        />
+        <div class="p-4">
+          <span class="text-gray text-lg">13.03.2020</span>
+          <p class="text-text text-2xl font-bold my-4">
+            Тариф на электроэнергию для квартир с электроплитами: как получить
+            льготу?
+          </p>
+          <a
+            class="text-gray text-lg italic underline underline-offset-4"
+            href="news_open.html"
+            >Подробнее<img
+              src="accets/arrow.svg"
+              class="h-5 w-9 ml-3"
+              style="display: inline"
+          /></a>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl border border-gray">
+        <img
+          src="accets/photo4.jpg"
+          alt="Фотография"
+          class="object-cover h-[200px] w-full rounded-t-2xl"
+        />
+        <div class="p-4">
+          <span class="text-gray text-lg">13.03.2020</span>
+          <p class="text-text text-2xl font-bold my-4">
+            Тариф на электроэнергию для квартир с электроплитами: как получить
+            льготу?
+          </p>
+          <a
+            class="text-gray text-lg italic underline underline-offset-4"
+            href="news_open.html"
+            >Подробнее<img
+              src="accets/arrow.svg"
+              class="h-5 w-9 ml-3"
+              style="display: inline"
+          /></a>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl border border-gray">
+        <img
+          src="accets/photo4.jpg"
+          alt="Фотография"
+          class="object-cover h-[200px] w-full rounded-t-2xl"
+        />
+        <div class="p-4">
+          <span class="text-gray text-lg">13.03.2020</span>
+          <p class="text-text text-2xl font-bold my-4">
+            Тариф на электроэнергию для квартир с электроплитами: как получить
+            льготу?
+          </p>
+          <a
+            class="text-gray text-lg italic underline underline-offset-4"
+            href="news_open.html"
+            >Подробнее<img
+              src="accets/arrow.svg"
+              class="h-5 w-9 ml-3"
+              style="display: inline"
+          /></a>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl border border-gray">
+        <img
+          src="accets/photo4.jpg"
+          alt="Фотография"
+          class="object-cover h-[200px] w-full rounded-t-2xl"
+        />
+        <div class="p-4">
+          <span class="text-gray text-lg">13.03.2020</span>
+          <p class="text-text text-2xl font-bold my-4">
+            Тариф на электроэнергию для квартир с электроплитами: как получить
+            льготу?
+          </p>
+          <a
+            class="text-gray text-lg italic underline underline-offset-4"
+            href="news_open.html"
+            >Подробнее<img
+              src="accets/arrow.svg"
+              class="h-5 w-9 ml-3"
+              style="display: inline"
+          /></a>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl border border-gray">
+        <img
+          src="accets/photo4.jpg"
+          alt="Фотография"
+          class="object-cover h-[200px] w-full rounded-t-2xl"
+        />
+        <div class="p-4">
+          <span class="text-gray text-lg">13.03.2020</span>
+          <p class="text-text text-2xl font-bold my-4">
+            Тариф на электроэнергию для квартир с электроплитами: как получить
+            льготу?
+          </p>
+          <a
+            class="text-gray text-lg italic underline underline-offset-4"
+            href="news_open.html"
+            >Подробнее<img
+              src="accets/arrow.svg"
+              class="h-5 w-9 ml-3"
+              style="display: inline"
+          /></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Стрелки и страницы -->
+    <div class="mx-[150px] mt-14 mb-28">
+      <div class="flex justify-end space-x-4 text-blue text-xl items-center">
+        <span class="text-text text-lg">Страницы</span>
+        <button>
+          <svg
+            class="h-6 w-6 fill-current text-blue transition-colors duration-300 hover:text-blue-button"
+            viewBox="0 0 35 35"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M35 3.18182V31.8182C35 33.5761 33.5761 35 31.8182 35H3.18182C1.42386 35 0 33.5761 0 31.8182V3.18182C0 1.42387 1.42386 0 3.18182 0H31.8182C33.5761 0 35 1.42386 35 3.18182ZM19.557 6.82977L10.0116 16.3752C9.38955 16.9973 9.38955 18.0027 10.0116 18.6248L19.557 28.1702C19.8673 28.4805 20.2745 28.6364 20.6818 28.6364C21.0891 28.6364 21.4964 28.4805 21.8066 28.1702C22.4286 27.5482 22.4286 26.5427 21.8066 25.9207L13.3859 17.5L21.8066 9.07932C22.4286 8.45728 22.4286 7.45182 21.8066 6.82978C21.1845 6.20773 20.1791 6.20773 19.557 6.82978L19.557 6.82977Z"
+            />
+          </svg>
+        </button>
+        <button><span>1</span></button>
+        <button><span class="font-bold">2</span></button>
+        <button><span>3</span></button>
+        <button>
+          <svg
+            class="h-6 w-6 fill-current text-blue transition-colors duration-300 hover:text-blue-button"
+            viewBox="0 0 35 35"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M0 3.18182V31.8182C0 33.5761 1.42386 35 3.18182 35H31.8182C33.5761 35 35 33.5761 35 31.8182V3.18182C35 1.42387 33.5761 0 31.8182 0H3.18182C1.42387 0 0 1.42386 0 3.18182ZM15.443 6.82977L24.9884 16.3752C25.6105 16.9973 25.6105 18.0027 24.9884 18.6248L15.443 28.1702C15.1327 28.4805 14.7255 28.6364 14.3182 28.6364C13.9109 28.6364 13.5036 28.4805 13.1934 28.1702C12.5714 27.5482 12.5714 26.5427 13.1934 25.9207L21.6141 17.5L13.1934 9.07932C12.5714 8.45728 12.5714 7.45182 13.1934 6.82978C13.8155 6.20773 14.8209 6.20773 15.443 6.82978L15.443 6.82977Z"
+            />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Подвал -->
+    <footer
+      class="bg-blue-button w-full flex flex-col items-center justify-center py-10 sm:py-12 md:py-16 lg:py-20 xl:py-24 2xl:py-26"
+    >
+      <div class="flex justify-between items-center w-[78%] max-w-screen-xl">
+        <div class="flex space-x-4 mr-14">
+          <img src="accets/logo.svg" alt="Логотип ЭНСА" />
+          <span class="text-2xl font-bold text-white">ЭНСА</span>
+        </div>
+        <div
+          class="flex items-center space-x-8 hidden sm:hidden md:hidden xl:flex 2xl:flex lg:flex"
+        >
+          <a href="#" class="text-lg text-white">О предприятии</a>
+          <a href="#" class="text-lg text-white">Тарифы</a>
+          <a href="#" class="text-lg text-white">Новости</a>
+          <a href="#" class="text-lg text-white">Контакты</a>
+        </div>
+        <div class="flex space-x-4 items-center">
+          <button
+            id="authButton"
+            class="text-white px-4 py-2 text-lg flex items-center"
+          >
+            <img src="accets/profil.svg" alt="Войти" class="h-6 w-6 mr-4" />
+            <span>Войти</span>
+          </button>
+          <button
+            class="bg-blue-button text-white px-4 py-2 rounded-2xl text-lg flex items-center"
+          >
+            <img src="accets/mail.svg" alt="Почта" class="h-6 w-6 mr-4" />
+            <span>dm.5265@mail.ru</span>
+          </button>
+        </div>
+      </div>
+      <p
+        class="text-white text-base mt-10 mx-16 sm:mx-16 md:mx-20 lg:mx-24 xl:mx-28 2xl:mx-40"
+      >
+        Продолжая использовать наш сайт, Вы даете согласие на обработку файлов
+        Cookies, в соответствии с
+        <a href="" class="underline underline-offset-2"
+          >Политикой конфиденциальности</a
+        >
+        и
+        <a href="" class="underline underline-offset-2"
+          >Согласием на обработку персональных данных</a
+        >
+      </p>
+      <p class="text-white text-base mt-8">@ 2020 Все права защищены.</p>
+    </footer>
+  </body>
+  <script src="script.js"></script>
+</html>

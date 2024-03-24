@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ЭНСА</title>
+    <link rel="stylesheet" href="/public/styles.css" />
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  </head>
+
+  <!-- Модальное окно -->
+  <div
+    id="overlay"
+    class="overlay fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 backdrop-blur-lg z-50 hidden"
+  ></div>
+  <div id="myModal" class="modal hidden fixed z-50 inset-0 overflow-y-auto">
+    <div class="flex items-center justify-center min-h-screen">
+      <div class="modal-overlay fixed inset-0 bg-black opacity-50"></div>
+      <div
+        class="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded-3xl shadow-lg z-50 overflow-y-auto"
+      >
+        <div class="modal-content py-4 text-center px-6">
+          <div class="flex items-center pb-1 justify-end">
+            <button
+              id="closeButton"
+              class="text-red-500 bg-transparent border-none rounded-full w-6 h-6 flex items-center justify-center"
+            >
+              <svg
+                width="30"
+                height="30"
+                viewBox="0 0 30 30"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12.5379 11.2121C12.1718 10.846 11.5782 10.846 11.2121 11.2121C10.846 11.5782 10.846 12.1718 11.2121 12.5379L13.6742 15L11.2121 17.4621C10.846 17.8281 10.846 18.4218 11.2121 18.7879C11.5782 19.154 12.1718 19.154 12.5379 18.7879L15 16.3259L17.462 18.7879C17.8282 19.154 18.4218 19.154 18.7879 18.7879C19.154 18.4218 19.154 17.8281 18.7879 17.462L16.3258 15L18.7879 12.5379C19.154 12.1718 19.154 11.5782 18.7879 11.2121C18.4218 10.846 17.8282 10.846 17.462 11.2121L15 13.6741L12.5379 11.2121Z"
+                  fill="#FD7C58"
+                />
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M15 1.5625C7.57868 1.5625 1.5625 7.57868 1.5625 15C1.5625 22.4214 7.57868 28.4375 15 28.4375C22.4214 28.4375 28.4375 22.4214 28.4375 15C28.4375 7.57868 22.4214 1.5625 15 1.5625ZM3.4375 15C3.4375 8.61421 8.61421 3.4375 15 3.4375C21.3857 3.4375 26.5625 8.61421 26.5625 15C26.5625 21.3857 21.3857 26.5625 15 26.5625C8.61421 26.5625 3.4375 21.3857 3.4375 15Z"
+                  fill="#FD7C58"
+                />
+              </svg>
+            </button>
+          </div>
+          <div>
+            <p class="text-2xl font-bold text-blue text-center mb-6">
+              Авторизация
+            </p>
+          </div>
+          <form action="#" method="post">
+            <div class="mb-4">
+              <input
+                placeholder="Логин"
+                type="text"
+                id="username"
+                name="username"
+                class="placeholder-current w-full border border-blue rounded-lg px-2 py-2 focus:outline-none"
+              />
+            </div>
+            <div class="mb-4">
+              <input
+                placeholder="Пароль"
+                type="password"
+                id="password"
+                name="password"
+                class="placeholder-current w-full border border-blue rounded-lg px-2 py-2 focus:outline-none"
+              />
+              <p class="text-xs font-bold text-blue text-left mt-3 mb-2">
+                Забыли пароль?
+              </p>
+            </div>
+            <a
+              href="profile.html"
+              class="w-full bg-blue-button text-white px-4 py-2 rounded-lg hover:bg-blue transition duration-300 ease-in-out mb-4 block text-center"
+            >
+              Войти
+            </a>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <body class="mt-20">
+    <!-- Хедер навбар -->
+    <div class="mx-[50px] md:mx-[50px] xl:mx-[150px]">
+      <nav class="flex justify-between items-end">
+        <div class="flex items-center space-x-11">
+          <div
+            class="flex space-x-4 mr-12 md:mb-2 sm:mb-2 lg:mb-2 xl:mb-0 2xl:mb-0"
+          >
+            <img src="accets/logo.svg" alt="Логотип ЭНСА" />
+            <span class="text-2xl font-bold text-blue">ЭНСА</span>
+          </div>
+          <a href="index.html" class="hidden xl:inline text-lg text-blue"
+            >О предприятии</a
+          >
+          <a href="#" class="hidden xl:inline text-lg text-blue">Тарифы</a>
+          <a href="news.html" class="hidden xl:inline text-lg text-blue"
+            >Новости</a
+          >
+          <a href="#" class="hidden xl:inline text-lg text-blue">Контакты</a>
+        </div>
+        <div
+          class="fixed top-0 right-0 h-full bg-white w-64 p-4 shadow-lg transition-opacity duration-300 ease-in-out z-50"
+          id="mobileMenu"
+          style="display: none"
+        >
+          <div class="flex items-center justify-end -mb-5">
+            <button
+              id="closeMenuButton"
+              class="text-red-500 bg-transparent border-none rounded-full w-6 h-6 flex items-center justify-center"
+            >
+              <svg
+                width="30"
+                height="30"
+                viewBox="0 0 30 30"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12.5379 11.2121C12.1718 10.846 11.5782 10.846 11.2121 11.2121C10.846 11.5782 10.846 12.1718 11.2121 12.5379L13.6742 15L11.2121 17.4621C10.846 17.8281 10.846 18.4218 11.2121 18.7879C11.5782 19.154 12.1718 19.154 12.5379 18.7879L15 16.3259L17.462 18.7879C17.8282 19.154 18.4218 19.154 18.7879 18.7879C19.154 18.4218 19.154 17.8281 18.7879 17.462L16.3258 15L18.7879 12.5379C19.154 12.1718 19.154 11.5782 18.7879 11.2121C18.4218 10.846 17.8282 10.846 17.462 11.2121L15 13.6741L12.5379 11.2121Z"
+                  fill="#FD7C58"
+                />
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M15 1.5625C7.57868 1.5625 1.5625 7.57868 1.5625 15C1.5625 22.4214 7.57868 28.4375 15 28.4375C22.4214 28.4375 28.4375 22.4214 28.4375 15C28.4375 7.57868 22.4214 1.5625 15 1.5625ZM3.4375 15C3.4375 8.61421 8.61421 3.4375 15 3.4375C21.3857 3.4375 26.5625 8.61421 26.5625 15C26.5625 21.3857 21.3857 26.5625 15 26.5625C8.61421 26.5625 3.4375 21.3857 3.4375 15Z"
+                  fill="#FD7C58"
+                />
+              </svg>
+            </button>
+          </div>
+          <div class="flex flex-col items-start mt-4">
+            <a
+              href="index.html"
+              class="text-lg text-blue bg-blue-200 hover:bg-blue-300 py-2 px-4 mb-2 block border-b border-black w-full"
+              >О предприятии</a
+            >
+            <a
+              href="#"
+              class="text-lg text-blue bg-blue-200 hover:bg-blue-300 py-2 px-4 mb-2 block border-b border-black w-full"
+              >Тарифы</a
+            >
+            <a
+              href="news.html"
+              class="text-lg text-blue bg-blue-200 hover:bg-blue-300 py-2 px-4 mb-2 block border-b border-black w-full"
+              >Новости</a
+            >
+            <a
+              href="#"
+              class="text-lg text-blue bg-blue-200 hover:bg-blue-300 py-2 px-4 mb-2 block border-b border-black w-full"
+              >Контакты</a
+            >
+          </div>
+        </div>
+        <div class="items-center space-x-4 hidden xl:flex md:hidden">
+          <button
+            id="authButton"
+            class="bg-blue-button hover:bg-blue transition duration-300 ease-in-out text-white px-3 lx:px-4 py-2 rounded-2xl text-lg flex items-center"
+          >
+            <img src="accets/profil.svg" alt="Войти" class="h-6 w-6" />
+            <span class="hidden xl:inline ml-2">Войти в личный кабинет</span>
+          </button>
+          <button
+            class="bg-blue-button hover:bg-blue transition duration-300 ease-in-out text-white px-3 lx:px-4 py-2 rounded-2xl text-lg flex items-center"
+          >
+            <img src="accets/mail.svg" alt="Почта" class="h-6 w-6" />
+          </button>
+        </div>
+
+        <div class="flex items-center space-x-4 mb-1 xl:hidden">
+          <button
+            id="authButton"
+            class="bg-blue-button hover:bg-blue transition duration-300 ease-in-out text-white px-3 py-2 rounded-2xl text-lg flex items-center xl:inline"
+          >
+            <img src="accets/profil.svg" alt="Войти" class="h-6 w-6" />
+            <span class="hidden xl:inline ml-2">Войти в личный кабинет</span>
+          </button>
+          <button
+            class="bg-blue-button hover:bg-blue transition duration-300 ease-in-out text-white px-3 py-2 rounded-2xl text-lg flex items-center xl:inline"
+          >
+            <img src="accets/mail.svg" alt="Почта" class="h-6 w-6" />
+          </button>
+          <button id="menuButton" class="block text-blue text-xl">
+            <svg
+              width="29"
+              height="31"
+              viewBox="0 0 29 31"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect width="29" height="5" rx="2.5" fill="#4170B7" />
+              <rect y="26" width="29" height="5" rx="2.5" fill="#4170B7" />
+              <rect y="13" width="29" height="5" rx="2.5" fill="#4170B7" />
+            </svg>
+          </button>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Профиль -->
+    <main class="flex justify-center bg-white">
+      <section class="relative py-16">
+        <div class="container mx-auto px-4">
+          <div
+            class="relative flex flex-col min-w-0 bg-white w-full mb-6 shadow-2xl rounded-3xl"
+          >
+            <img
+              src="accets/pen.svg"
+              alt="Изменить"
+              class="object-cover h-[25px] w-[25px] absolute top-0 right-0 mt-6 mr-6"
+            />
+            <div class="px-10 flex flex-col items-center">
+              <img
+                src="accets/photo1.jpg"
+                alt="Фото"
+                class="object-cover h-[200px] w-[200px] rounded-full my-8"
+              />
+              <h3 class="text-4xl font-semibold leading-normal mb-2 text-text text-center">
+                Иванов Иван Иванович
+              </h3>
+              <div
+                class="text-sm leading-normal mb-2 text-text font-bold uppercase"
+              >
+                <i class="mr-2 text-lg text-text"></i>
+                Архангельск
+              </div>
+              <div class="mb-2 text-text mt-10">
+                <i class="mr-2 text-lg text-text"></i>Дата рождения: 22.03.1984
+              </div>
+              <div class="mb-2 text-text">
+                <i class="mr-2 text-lg text-text"></i>Телефон: +7(989)123-45-67
+              </div>
+              <div class="py-6 my-4">
+                <a
+                  href="news.html"
+                  class="border border-orange text-text text-base py-2 px-16 rounded-lg hover:bg-orange hover:text-white transition duration-300 ease-in-out"
+                >
+                  Выйти
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Подвал -->
+    <footer
+      class="bg-blue-button w-full flex flex-col items-center justify-center py-10 sm:py-12 md:py-16 lg:py-20 xl:py-24 2xl:py-26"
+    >
+      <div class="flex justify-between items-center w-[78%] max-w-screen-xl">
+        <div class="flex space-x-4 mr-14">
+          <img src="accets/logo.svg" alt="Логотип ЭНСА" />
+          <span class="text-2xl font-bold text-white">ЭНСА</span>
+        </div>
+        <div
+          class="flex items-center space-x-8 hidden sm:hidden md:hidden xl:flex 2xl:flex lg:flex"
+        >
+          <a href="#" class="text-lg text-white">О предприятии</a>
+          <a href="#" class="text-lg text-white">Тарифы</a>
+          <a href="#" class="text-lg text-white">Новости</a>
+          <a href="#" class="text-lg text-white">Контакты</a>
+        </div>
+        <div class="flex space-x-4 items-center">
+          <button
+            id="authButton"
+            class="text-white px-4 py-2 text-lg flex items-center"
+          >
+            <img src="accets/profil.svg" alt="Войти" class="h-6 w-6 mr-4" />
+            <span>Войти</span>
+          </button>
+          <button
+            class="bg-blue-button text-white px-4 py-2 rounded-2xl text-lg flex items-center"
+          >
+            <img src="accets/mail.svg" alt="Почта" class="h-6 w-6 mr-4" />
+            <span>dm.5265@mail.ru</span>
+          </button>
+        </div>
+      </div>
+      <p
+        class="text-white text-base mt-10 mx-16 sm:mx-16 md:mx-20 lg:mx-24 xl:mx-28 2xl:mx-40"
+      >
+        Продолжая использовать наш сайт, Вы даете согласие на обработку файлов
+        Cookies, в соответствии с
+        <a href="" class="underline underline-offset-2"
+          >Политикой конфиденциальности</a
+        >
+        и
+        <a href="" class="underline underline-offset-2"
+          >Согласием на обработку персональных данных</a
+        >
+      </p>
+      <p class="text-white text-base mt-8">@ 2020 Все права защищены.</p>
+    </footer>
+  </body>
+
+  <script src="script.js"></script>
+</html>
