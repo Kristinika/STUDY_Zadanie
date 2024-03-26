@@ -7,7 +7,11 @@ module.exports = {
     "./profile.html"
   ],
   theme: {
-    extend: {},
+    extend: {
+      classes: {
+        'hyphens-auto': { hyphens: 'auto' },
+      },
+    },
     colors: {
       transparent: 'transparent',
       current: 'currentColor',
@@ -21,6 +25,15 @@ module.exports = {
       'coral': '#C2767D',
       'gray': '#AAAAAA',
     },
+    screens: {
+      'tn': '370px',
+      'lt': '480px',
+      'sm': '640px',
+      'md': '768px',
+      'lg': '1024px',
+      'xl': '1280px',
+      '2xl': '1536px',
+    }
   },
   plugins: [],
 }

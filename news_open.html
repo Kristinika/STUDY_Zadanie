@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ЭНСА</title>
+    <link rel="stylesheet" href="/public/styles.css" />
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <link
       rel="stylesheet"
@@ -104,13 +105,81 @@
     </div>
   </div>
 
+  <!-- Модальное окно для почты -->
+  <div id="emailModal" class="modal hidden fixed z-50 inset-0 overflow-y-auto">
+    <div class="flex items-center justify-center min-h-screen">
+      <div class="modal-overlay fixed inset-0 bg-black opacity-50"></div>
+      <div
+        class="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded-3xl shadow-lg z-50 overflow-y-auto"
+      >
+        <div class="modal-content py-4 text-center px-6">
+          <div class="flex items-center pb-1 justify-end">
+            <button
+              id="closeEmailButton"
+              class="text-red-500 bg-transparent border-none rounded-full w-6 h-6 flex items-center justify-center"
+            >
+              <svg
+                width="30"
+                height="30"
+                viewBox="0 0 30 30"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12.5379 11.2121C12.1718 10.846 11.5782 10.846 11.2121 11.2121C10.846 11.5782 10.846 12.1718 11.2121 12.5379L13.6742 15L11.2121 17.4621C10.846 17.8281 10.846 18.4218 11.2121 18.7879C11.5782 19.154 12.1718 19.154 12.5379 18.7879L15 16.3259L17.462 18.7879C17.8282 19.154 18.4218 19.154 18.7879 18.7879C19.154 18.4218 19.154 17.8281 18.7879 17.462L16.3258 15L18.7879 12.5379C19.154 12.1718 19.154 11.5782 18.7879 11.2121C18.4218 10.846 17.8282 10.846 17.462 11.2121L15 13.6741L12.5379 11.2121Z"
+                  fill="#FD7C58"
+                />
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M15 1.5625C7.57868 1.5625 1.5625 7.57868 1.5625 15C1.5625 22.4214 7.57868 28.4375 15 28.4375C22.4214 28.4375 28.4375 22.4214 28.4375 15C28.4375 7.57868 22.4214 1.5625 15 1.5625ZM3.4375 15C3.4375 8.61421 8.61421 3.4375 15 3.4375C21.3857 3.4375 26.5625 8.61421 26.5625 15C26.5625 21.3857 21.3857 26.5625 15 26.5625C8.61421 26.5625 3.4375 21.3857 3.4375 15Z"
+                  fill="#FD7C58"
+                />
+              </svg>
+            </button>
+          </div>
+          <div>
+            <p class="text-2xl font-bold text-blue text-center mb-6">
+              Отправить сообщение
+            </p>
+          </div>
+          <form action="#" method="post">
+            <div class="mb-4">
+              <input
+                placeholder="Ваш email"
+                type="email"
+                id="email"
+                name="email"
+                class="placeholder-current w-full border border-blue rounded-lg px-2 py-2 focus:outline-none"
+              />
+            </div>
+            <div class="mb-4">
+              <textarea
+                placeholder="Сообщение"
+                id="message"
+                name="message"
+                class="placeholder-current w-full border border-blue rounded-lg px-2 py-2 focus:outline-none"
+              ></textarea>
+            </div>
+            <a
+              href="news_open.html"
+              class="w-full bg-blue-button text-white px-4 py-2 rounded-lg hover:bg-blue transition duration-300 ease-in-out mb-4 block text-center"
+            >
+              Отправить
+            </a>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <body class="mt-20">
     <!-- Хедер навбар -->
-    <div class="mx-[50px] md:mx-[50px] xl:mx-[150px]">
+    <div class="mx-[30px] md:mx-[50px] xl:mx-[150px]">
       <nav class="flex justify-between items-end">
         <div class="flex items-center space-x-11">
           <div
-            class="flex space-x-4 mr-12 md:mb-2 sm:mb-2 lg:mb-2 xl:mb-0 2xl:mb-0"
+            class="flex space-x-2 2xl:space-x-4 mr-8 2xl:mr-12 md:mb-2 sm:mb-2 lg:mb-2 xl:mb-0 2xl:mb-0"
           >
             <img src="accets/logo.svg" alt="Логотип ЭНСА" />
             <span class="text-2xl font-bold text-blue">ЭНСА</span>
@@ -177,7 +246,7 @@
             >
           </div>
         </div>
-        <div class="flex items-center space-x-4 hidden xl:flex md:hidden">
+        <div class="flex items-center space-x-4">
           <button
             id="authButton"
             class="bg-blue-button hover:bg-blue transition duration-300 ease-in-out text-white px-3 lx:px-4 py-2 rounded-2xl text-lg flex items-center"
@@ -186,26 +255,12 @@
             <span class="hidden xl:inline ml-2">Войти в личный кабинет</span>
           </button>
           <button
+            id="mailButton"
             class="bg-blue-button hover:bg-blue transition duration-300 ease-in-out text-white px-3 lx:px-4 py-2 rounded-2xl text-lg flex items-center"
           >
             <img src="accets/mail.svg" alt="Почта" class="h-6 w-6" />
           </button>
-        </div>
-
-        <div class="flex items-center space-x-4 mb-1 xl:hidden">
-          <button
-            id="authButton"
-            class="bg-blue-button hover:bg-blue transition duration-300 ease-in-out text-white px-3 py-2 rounded-2xl text-lg flex items-center xl:inline"
-          >
-            <img src="accets/profil.svg" alt="Войти" class="h-6 w-6" />
-            <span class="hidden xl:inline ml-2">Войти в личный кабинет</span>
-          </button>
-          <button
-            class="bg-blue-button hover:bg-blue transition duration-300 ease-in-out text-white px-3 py-2 rounded-2xl text-lg flex items-center xl:inline"
-          >
-            <img src="accets/mail.svg" alt="Почта" class="h-6 w-6" />
-          </button>
-          <button id="menuButton" class="block text-blue text-xl">
+          <button id="menuButton" class="block text-blue text-xl xl:hidden">
             <svg
               width="29"
               height="31"
@@ -225,7 +280,7 @@
     <!-- Картинка -->
     <div class="mt-32 relative">
       <div
-        class="rounded-3xl drop-shadow-xl shadow-2xl mx-[150px] flex items-center justify-center"
+        class="rounded-3xl drop-shadow-xl shadow-2xl mx-[50px] md:mx-[50px] xl:mx-[150px] flex items-center justify-center"
       >
         <img
           src="accets/image_6.jpg"
@@ -241,7 +296,7 @@
       <div class="mt-6">
         <p class="text-center text-white text-lg mt-40 z-40">13.03.2020</p>
         <h1
-          class="text-center text-white font-bold px-5 mt-2 mb-10 z-40 text-2xl sm:text-2xl md:text-3xl lg:text-3xl xl:text-4xl 2xl:text-4xl"
+          class="text-center text-white font-bold px-5 mt-2 mb-10 z-40 text-xl sm:text-2xl md:text-3xl lg:text-3xl xl:text-4xl 2xl:text-4xl"
         >
           Тариф на электроэнергию для квартир с электроплитами: как получить
           льготу?
@@ -249,10 +304,10 @@
       </div>
     </div>
     <div
-      class="grid grid-cols-1 md:grid-cols-1 xl:grid-cols-2 lg:grid-cols-1 xl:gap-60 lg:gap-0 mt-12 mx-[100px] xl:mx-[150px] 2xl:mx-[150px] md:mx-[100px] md:gap-0"
+      class="grid grid-cols-1 md:grid-cols-1 xl:grid-cols-2 lg:grid-cols-1 xl:gap-60 lg:gap-0 mt-12 mx-[50px] md:mx-[50px] xl:mx-[150px] md:gap-0"
     >
       <!-- Левая колонка -->
-      <div class="text-current space-y-5 leading-8 text-lg">
+      <div class="text-current space-y-5 leading-8 text-base sm:text-lg">
         <p>
           Глава государства еще раз поздравил Ильхама Алиева с убедительной
           победой на президентских выборах. По его словам, итоги голосования
@@ -294,7 +349,7 @@
         </p>
       </div>
       <!-- Правая колонка -->
-      <div class="text-current space-y-5 leading-8 text-lg">
+      <div class="text-current space-y-5 leading-8 text-base sm:text-lg">
         <p>
           "Товарооборот между Казахстаном и Азербайджаном c 2020 года увеличился
           в пять раз. Конечно, абсолютные цифры, может быть, не столь
@@ -326,7 +381,7 @@
     </div>
     <!-- КАРУСЕЛЬ -->
     <div
-      class="relative xl:mx-[150px] 2xl:mx-[150px] md:mx-[100px] mx-[100px] mt-14"
+      class="relative mx-[50px] md:mx-[50px] xl:mx-[150px] mt-14"
     >
       <div class="variable-width">
         <img class="p-3" src="accets/image_23.png" alt="Meeting 1" />
@@ -336,28 +391,77 @@
         <img class="p-3" src="accets/image_23.png" alt="Meeting 1" />
       </div>
       <div class="flex items-center justify-end">
-        <img src="accets/left-arrow.svg" alt="Влево" class="h-7 w-7 prev-btn" />
-        <img
-          src="accets/right-arrow.svg"
+        <svg
+          class="cursor-pointer prev-btn h-6 w-6 fill-current text-blue transition-colors duration-300 hover:text-blue-button mr-4"
+          viewBox="0 0 35 35"
+          fill="none"
+          alt="Влево"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M35 3.18182V31.8182C35 33.5761 33.5761 35 31.8182 35H3.18182C1.42386 35 0 33.5761 0 31.8182V3.18182C0 1.42387 1.42386 0 3.18182 0H31.8182C33.5761 0 35 1.42386 35 3.18182ZM19.557 6.82977L10.0116 16.3752C9.38955 16.9973 9.38955 18.0027 10.0116 18.6248L19.557 28.1702C19.8673 28.4805 20.2745 28.6364 20.6818 28.6364C21.0891 28.6364 21.4964 28.4805 21.8066 28.1702C22.4286 27.5482 22.4286 26.5427 21.8066 25.9207L13.3859 17.5L21.8066 9.07932C22.4286 8.45728 22.4286 7.45182 21.8066 6.82978C21.1845 6.20773 20.1791 6.20773 19.557 6.82978L19.557 6.82977Z"
+          />
+        </svg>
+        <svg
+          class="cursor-pointer next-btn h-6 w-6 fill-current text-blue transition-colors duration-300 hover:text-blue-button"
+          viewBox="0 0 35 35"
+          fill="none"
           alt="Вправо"
-          class="h-7 w-7 ml-4 next-btn"
-        />
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M0 3.18182V31.8182C0 33.5761 1.42386 35 3.18182 35H31.8182C33.5761 35 35 33.5761 35 31.8182V3.18182C35 1.42387 33.5761 0 31.8182 0H3.18182C1.42387 0 0 1.42386 0 3.18182ZM15.443 6.82977L24.9884 16.3752C25.6105 16.9973 25.6105 18.0027 24.9884 18.6248L15.443 28.1702C15.1327 28.4805 14.7255 28.6364 14.3182 28.6364C13.9109 28.6364 13.5036 28.4805 13.1934 28.1702C12.5714 27.5482 12.5714 26.5427 13.1934 25.9207L21.6141 17.5L13.1934 9.07932C12.5714 8.45728 12.5714 7.45182 13.1934 6.82978C13.8155 6.20773 14.8209 6.20773 15.443 6.82978L15.443 6.82977Z"
+          />
+        </svg>
       </div>
 
-      <div class="mt-12 flex items-center justify-center">
-        <h1 class="text-3xl text-center text-blue font-bold">Поделиться</h1>
-        <img
-          src="accets/image_26.png"
-          alt="социальные сети"
-          class="ml-1 mb-2"
-        />
+      <div class="mt-16 flex items-center justify-center">
+        <h1 class="text-2xl sm:text-3xl text-center text-blue font-bold">Поделиться</h1>
+        <div class="flex ml-4 mt-2">
+          <a href="https://vk.com/" target="_blank" rel="noopener noreferrer">
+            <img
+              src="accets/vk.svg"
+              alt="Вконтакте"
+              class="h-6 w-6 cursor-pointer"
+            />
+          </a>
+          <a href="https://ok.ru/" target="_blank" rel="noopener noreferrer">
+            <img
+              src="accets/ok.svg"
+              alt="Одноклассники"
+              class="h-6 w-6 cursor-pointer ml-1"
+            />
+          </a>
+          <a
+            href="https://web.telegram.org/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              src="accets/tg.svg"
+              alt="Telegram"
+              class="h-6 w-6 cursor-pointer ml-1"
+            />
+          </a>
+          <a
+            href="https://www.whatsapp.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              src="accets/whatsapp.svg"
+              alt="WhatsApp"
+              class="h-6 w-6 cursor-pointer ml-1"
+            />
+          </a>
+        </div>
       </div>
     </div>
 
     <div class="mt-8 mb-36 flex items-center justify-center">
       <a
         href="news.html"
-        class="border border-orange text-text text-lg py-4 px-32 rounded-lg mr-4 hover:bg-orange hover:text-white transition duration-300 ease-in-out"
+        class="border border-orange text-text text-lg py-3 px-20 sm:py-4 sm:px-32 rounded-lg hover:bg-orange hover:text-white transition duration-300 ease-in-out"
       >
         Все новости
       </a>
@@ -367,13 +471,15 @@
     <footer
       class="bg-blue-button w-full flex flex-col items-center justify-center py-10 sm:py-12 md:py-16 lg:py-20 xl:py-24 2xl:py-26"
     >
-      <div class="flex justify-between items-center w-[78%] max-w-screen-xl">
-        <div class="flex space-x-4 mr-14">
+      <div
+        class="flex justify-between items-center w-[90%] max-w-screen-xl flex-col sm:flex-row md:flex-row lg:flex-row xl:flex-row 2xl:flex-row"
+      >
+        <div class="flex space-x-4 mr-0 sm:mr-12 mb-6 sm:mb-0">
           <img src="accets/logo.svg" alt="Логотип ЭНСА" />
           <span class="text-2xl font-bold text-white">ЭНСА</span>
         </div>
         <div
-          class="flex items-center space-x-8 hidden sm:hidden md:hidden xl:flex 2xl:flex lg:flex"
+          class="items-center space-x-8 hidden xl:flex"
         >
           <a href="#" class="text-lg text-white">О предприятии</a>
           <a href="#" class="text-lg text-white">Тарифы</a>
@@ -389,15 +495,19 @@
             <span>Войти</span>
           </button>
           <button
-            class="bg-blue-button text-white px-4 py-2 rounded-2xl text-lg flex items-center"
+            id="mailButton"
+            class="bg-blue-button text-white px-4 py-2 items-center"
+            onclick="openEmailModal()"
           >
             <img src="accets/mail.svg" alt="Почта" class="h-6 w-6 mr-4" />
-            <span>dm.5265@mail.ru</span>
           </button>
+          <a href="mailto:dm.5265@mail.ru" class="text-white text-lg"
+            >dm.5265@mail.ru</a
+          >
         </div>
       </div>
       <p
-        class="text-white text-base mt-10 mx-16 sm:mx-16 md:mx-20 lg:mx-24 xl:mx-28 2xl:mx-40"
+        class="text-white text-center text-base mt-10 mx-16 sm:mx-16 md:mx-20 lg:mx-24 xl:mx-28 2xl:mx-40"
       >
         Продолжая использовать наш сайт, Вы даете согласие на обработку файлов
         Cookies, в соответствии с

@@ -6,6 +6,26 @@
     <title>ЭНСА</title>
     <link rel="stylesheet" href="/public/styles.css" />
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css"
+      integrity="sha512-yHknP1/AwR+yx26cB1y0cjvQUMvEa2PFzt1c9LlS4pRQ5NOTZFWbhBig+X9G9eYW/8m0/4OXNx8pxJ6z57x0dw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css"
+      integrity="sha512-17EgCFERpgZKcm0j0fEq1YCJuyAWdz9KUtv1EjVuaOz8pDnh/0nZxmU6BBXwaaxqoi9PQXnRWqlcDB027hgv9A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"
+      integrity="sha512-HGOnQO9+SP1V92SrtZfjqxxtLmVzqZpjFFekvzZVWoiASSQgSr4cw9Kqd2+l8Llp4Gm0G8GIFJ4ddwZilcdb8A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
   </head>
 
   <!-- Модальное окно -->
@@ -84,13 +104,81 @@
     </div>
   </div>
 
+  <!-- Модальное окно для почты -->
+  <div id="emailModal" class="modal hidden fixed z-50 inset-0 overflow-y-auto">
+    <div class="flex items-center justify-center min-h-screen">
+      <div class="modal-overlay fixed inset-0 bg-black opacity-50"></div>
+      <div
+        class="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded-3xl shadow-lg z-50 overflow-y-auto"
+      >
+        <div class="modal-content py-4 text-center px-6">
+          <div class="flex items-center pb-1 justify-end">
+            <button
+              id="closeEmailButton"
+              class="text-red-500 bg-transparent border-none rounded-full w-6 h-6 flex items-center justify-center"
+            >
+              <svg
+                width="30"
+                height="30"
+                viewBox="0 0 30 30"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12.5379 11.2121C12.1718 10.846 11.5782 10.846 11.2121 11.2121C10.846 11.5782 10.846 12.1718 11.2121 12.5379L13.6742 15L11.2121 17.4621C10.846 17.8281 10.846 18.4218 11.2121 18.7879C11.5782 19.154 12.1718 19.154 12.5379 18.7879L15 16.3259L17.462 18.7879C17.8282 19.154 18.4218 19.154 18.7879 18.7879C19.154 18.4218 19.154 17.8281 18.7879 17.462L16.3258 15L18.7879 12.5379C19.154 12.1718 19.154 11.5782 18.7879 11.2121C18.4218 10.846 17.8282 10.846 17.462 11.2121L15 13.6741L12.5379 11.2121Z"
+                  fill="#FD7C58"
+                />
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M15 1.5625C7.57868 1.5625 1.5625 7.57868 1.5625 15C1.5625 22.4214 7.57868 28.4375 15 28.4375C22.4214 28.4375 28.4375 22.4214 28.4375 15C28.4375 7.57868 22.4214 1.5625 15 1.5625ZM3.4375 15C3.4375 8.61421 8.61421 3.4375 15 3.4375C21.3857 3.4375 26.5625 8.61421 26.5625 15C26.5625 21.3857 21.3857 26.5625 15 26.5625C8.61421 26.5625 3.4375 21.3857 3.4375 15Z"
+                  fill="#FD7C58"
+                />
+              </svg>
+            </button>
+          </div>
+          <div>
+            <p class="text-2xl font-bold text-blue text-center mb-6">
+              Отправить сообщение
+            </p>
+          </div>
+          <form action="#" method="post">
+            <div class="mb-4">
+              <input
+                placeholder="Ваш email"
+                type="email"
+                id="email"
+                name="email"
+                class="placeholder-current w-full border border-blue rounded-lg px-2 py-2 focus:outline-none"
+              />
+            </div>
+            <div class="mb-4">
+              <textarea
+                placeholder="Сообщение"
+                id="message"
+                name="message"
+                class="placeholder-current w-full border border-blue rounded-lg px-2 py-2 focus:outline-none"
+              ></textarea>
+            </div>
+            <a
+              href="news.html"
+              class="w-full bg-blue-button text-white px-4 py-2 rounded-lg hover:bg-blue transition duration-300 ease-in-out mb-4 block text-center"
+            >
+              Отправить
+            </a>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <body class="mt-20">
     <!-- Хедер навбар -->
-    <div class="mx-[50px] md:mx-[50px] xl:mx-[150px]">
+    <div class="mx-[30px] md:mx-[50px] xl:mx-[150px]">
       <nav class="flex justify-between items-end">
         <div class="flex items-center space-x-11">
           <div
-            class="flex space-x-4 mr-12 md:mb-2 sm:mb-2 lg:mb-2 xl:mb-0 2xl:mb-0"
+            class="flex space-x-2 2xl:space-x-4 mr-8 2xl:mr-12 md:mb-2 sm:mb-2 lg:mb-2 xl:mb-0 2xl:mb-0"
           >
             <img src="accets/logo.svg" alt="Логотип ЭНСА" />
             <span class="text-2xl font-bold text-blue">ЭНСА</span>
@@ -157,7 +245,7 @@
             >
           </div>
         </div>
-        <div class="flex items-center space-x-4 hidden xl:flex md:hidden">
+        <div class="flex items-center space-x-4">
           <button
             id="authButton"
             class="bg-blue-button hover:bg-blue transition duration-300 ease-in-out text-white px-3 lx:px-4 py-2 rounded-2xl text-lg flex items-center"
@@ -166,26 +254,12 @@
             <span class="hidden xl:inline ml-2">Войти в личный кабинет</span>
           </button>
           <button
+            id="mailButton"
             class="bg-blue-button hover:bg-blue transition duration-300 ease-in-out text-white px-3 lx:px-4 py-2 rounded-2xl text-lg flex items-center"
           >
             <img src="accets/mail.svg" alt="Почта" class="h-6 w-6" />
           </button>
-        </div>
-
-        <div class="flex items-center space-x-4 mb-1 xl:hidden">
-          <button
-            id="authButton"
-            class="bg-blue-button hover:bg-blue transition duration-300 ease-in-out text-white px-3 py-2 rounded-2xl text-lg flex items-center xl:inline"
-          >
-            <img src="accets/profil.svg" alt="Войти" class="h-6 w-6" />
-            <span class="hidden xl:inline ml-2">Войти в личный кабинет</span>
-          </button>
-          <button
-            class="bg-blue-button hover:bg-blue transition duration-300 ease-in-out text-white px-3 py-2 rounded-2xl text-lg flex items-center xl:inline"
-          >
-            <img src="accets/mail.svg" alt="Почта" class="h-6 w-6" />
-          </button>
-          <button id="menuButton" class="block text-blue text-xl">
+          <button id="menuButton" class="block text-blue text-xl xl:hidden">
             <svg
               width="29"
               height="31"
@@ -204,15 +278,15 @@
 
     <!-- Новости -->
     <div class="bg-blue-button h-[450px] flex flex-col items-center mt-16">
-      <h2 class="text-white text-4xl font-bold mt-16">Новости</h2>
+      <h2 class="text-white text-3xl sm:text-4xl font-bold mt-16">Новости</h2>
     </div>
 
-    <div class="bg-white rounded-3xl mx-[150px] xl:mx-[220px] -mt-72 flex">
+    <div class="bg-white rounded-3xl mx-[30px] sm:mx-[100px] xl:mx-[220px] -mt-72 flex flex-col lg:flex-row">
       <div>
         <img
           src="accets/photo4.jpg"
           alt="Фотография"
-          class="object-cover h-[390px] w-[650px] rounded-3xl hidden lg:hiiden xl:flex 2xl:flex"
+          class="object-cover h-[350px] w-full lg:h-full lg:w-[650px] rounded-3xl flex"
         />
       </div>
 
@@ -224,7 +298,7 @@
             Тариф на электроэнергию для квартир с электроплитами: как получить
             льготу?
           </p>
-          <p class="text-text 2xl:text-lg xl:text-lg md:text-md mb-10">
+          <p class="text-text text-base md:text-base xl:text-lg 2xl:text-lg mb-10">
             Если плита на кухне электрическая, а не газовая, то тариф на
             электроэнергию будет ниже на 30%. Это своего рода льгота, которая
             предоставляется жильцами, чтобы компенсировать им более высокий
@@ -234,19 +308,19 @@
           <div class="flex justify-between items-center">
             <div>
               <a
-                class="text-gray text-lg mb-10 italic underline underline-offset-4"
+                class="text-gray text-base sm:text-lg mb-10 italic underline underline-offset-4"
                 href="news_open.html"
               >
                 Подробнее
                 <img
                   src="accets/arrow.svg"
-                  class="h-5 w-9 ml-3"
+                  class="h-4 w-7 sm:h-5 sm:w-9 ml-1 sm:ml-3"
                   style="display: inline"
                 />
               </a>
             </div>
             <div>
-              <span class="text-gray text-lg">13.03.2020</span>
+              <span class="text-gray text-base sm:text-lg">13.03.2020</span>
             </div>
           </div>
         </div>
@@ -255,8 +329,7 @@
 
     <!-- Сетка карточек новостей -->
     <div
-      class="grid xl:grid-cols-3 2xl:grid-cols-3 lg:grid-cols-1 gap-6 mt-24 mx-[150px] md:grid-cols-1"
-    >
+      class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 xl:grid-cols-3 2xl:grid-cols-3 gap-6 mt-24 mx-[30px] sm:mx-[100px] xl:mx-[150px]">
       <div class="bg-white rounded-2xl border border-gray">
         <img
           src="accets/photo4.jpg"
@@ -265,16 +338,16 @@
         />
         <div class="p-4">
           <span class="text-gray text-lg">13.03.2020</span>
-          <p class="text-text text-2xl font-bold my-4">
+          <p class="text-text text-lg md:text-2xl font-bold my-4">
             Тариф на электроэнергию для квартир с электроплитами: как получить
             льготу?
           </p>
           <a
-            class="text-gray text-lg italic underline underline-offset-4"
+            class="text-gray text-base md:text-lg italic underline underline-offset-4"
             href="news_open.html"
             >Подробнее<img
               src="accets/arrow.svg"
-              class="h-5 w-9 ml-3"
+              class="h-4 w-7 sm:h-5 sm:w-9 ml-1 sm:ml-3"
               style="display: inline"
           /></a>
         </div>
@@ -288,16 +361,16 @@
         />
         <div class="p-4">
           <span class="text-gray text-lg">13.03.2020</span>
-          <p class="text-text text-2xl font-bold my-4">
+          <p class="text-text text-lg md:text-2xl font-bold my-4">
             Тариф на электроэнергию для квартир с электроплитами: как получить
             льготу?
           </p>
           <a
-            class="text-gray text-lg italic underline underline-offset-4"
+            class="text-gray text-base md:text-lg italic underline underline-offset-4"
             href="news_open.html"
             >Подробнее<img
               src="accets/arrow.svg"
-              class="h-5 w-9 ml-3"
+              class="h-4 w-7 sm:h-5 sm:w-9 ml-1 sm:ml-3"
               style="display: inline"
           /></a>
         </div>
@@ -311,16 +384,16 @@
         />
         <div class="p-4">
           <span class="text-gray text-lg">13.03.2020</span>
-          <p class="text-text text-2xl font-bold my-4">
+          <p class="text-text text-lg md:text-2xl font-bold my-4">
             Тариф на электроэнергию для квартир с электроплитами: как получить
             льготу?
           </p>
           <a
-            class="text-gray text-lg italic underline underline-offset-4"
+            class="text-gray text-base md:text-lg italic underline underline-offset-4"
             href="news_open.html"
             >Подробнее<img
               src="accets/arrow.svg"
-              class="h-5 w-9 ml-3"
+              class="h-4 w-7 sm:h-5 sm:w-9 ml-1 sm:ml-3"
               style="display: inline"
           /></a>
         </div>
@@ -334,16 +407,16 @@
         />
         <div class="p-4">
           <span class="text-gray text-lg">13.03.2020</span>
-          <p class="text-text text-2xl font-bold my-4">
+          <p class="text-text text-lg md:text-2xl font-bold my-4">
             Тариф на электроэнергию для квартир с электроплитами: как получить
             льготу?
           </p>
           <a
-            class="text-gray text-lg italic underline underline-offset-4"
+            class="text-gray text-base md:text-lg italic underline underline-offset-4"
             href="news_open.html"
             >Подробнее<img
               src="accets/arrow.svg"
-              class="h-5 w-9 ml-3"
+              class="h-4 w-7 sm:h-5 sm:w-9 ml-1 sm:ml-3"
               style="display: inline"
           /></a>
         </div>
@@ -357,16 +430,16 @@
         />
         <div class="p-4">
           <span class="text-gray text-lg">13.03.2020</span>
-          <p class="text-text text-2xl font-bold my-4">
+          <p class="text-text text-lg md:text-2xl font-bold my-4">
             Тариф на электроэнергию для квартир с электроплитами: как получить
             льготу?
           </p>
           <a
-            class="text-gray text-lg italic underline underline-offset-4"
+            class="text-gray text-base md:text-lg italic underline underline-offset-4"
             href="news_open.html"
             >Подробнее<img
               src="accets/arrow.svg"
-              class="h-5 w-9 ml-3"
+              class="h-4 w-7 sm:h-5 sm:w-9 ml-1 sm:ml-3"
               style="display: inline"
           /></a>
         </div>
@@ -380,16 +453,16 @@
         />
         <div class="p-4">
           <span class="text-gray text-lg">13.03.2020</span>
-          <p class="text-text text-2xl font-bold my-4">
+          <p class="text-text text-lg md:text-2xl font-bold my-4">
             Тариф на электроэнергию для квартир с электроплитами: как получить
             льготу?
           </p>
           <a
-            class="text-gray text-lg italic underline underline-offset-4"
+            class="text-gray text-base md:text-lg italic underline underline-offset-4"
             href="news_open.html"
             >Подробнее<img
               src="accets/arrow.svg"
-              class="h-5 w-9 ml-3"
+              class="h-4 w-7 sm:h-5 sm:w-9 ml-1 sm:ml-3"
               style="display: inline"
           /></a>
         </div>
@@ -403,16 +476,16 @@
         />
         <div class="p-4">
           <span class="text-gray text-lg">13.03.2020</span>
-          <p class="text-text text-2xl font-bold my-4">
+          <p class="text-text text-lg md:text-2xl font-bold my-4">
             Тариф на электроэнергию для квартир с электроплитами: как получить
             льготу?
           </p>
           <a
-            class="text-gray text-lg italic underline underline-offset-4"
+            class="text-gray text-base md:text-lg italic underline underline-offset-4"
             href="news_open.html"
             >Подробнее<img
               src="accets/arrow.svg"
-              class="h-5 w-9 ml-3"
+              class="h-4 w-7 sm:h-5 sm:w-9 ml-1 sm:ml-3"
               style="display: inline"
           /></a>
         </div>
@@ -426,16 +499,16 @@
         />
         <div class="p-4">
           <span class="text-gray text-lg">13.03.2020</span>
-          <p class="text-text text-2xl font-bold my-4">
+          <p class="text-text text-lg md:text-2xl font-bold my-4">
             Тариф на электроэнергию для квартир с электроплитами: как получить
             льготу?
           </p>
           <a
-            class="text-gray text-lg italic underline underline-offset-4"
+            class="text-gray text-base md:text-lg italic underline underline-offset-4"
             href="news_open.html"
             >Подробнее<img
               src="accets/arrow.svg"
-              class="h-5 w-9 ml-3"
+              class="h-4 w-7 sm:h-5 sm:w-9 ml-1 sm:ml-3"
               style="display: inline"
           /></a>
         </div>
@@ -449,29 +522,28 @@
         />
         <div class="p-4">
           <span class="text-gray text-lg">13.03.2020</span>
-          <p class="text-text text-2xl font-bold my-4">
+          <p class="text-text text-lg md:text-2xl font-bold my-4">
             Тариф на электроэнергию для квартир с электроплитами: как получить
             льготу?
           </p>
           <a
-            class="text-gray text-lg italic underline underline-offset-4"
+            class="text-gray text-base md:text-lg italic underline underline-offset-4"
             href="news_open.html"
             >Подробнее<img
               src="accets/arrow.svg"
-              class="h-5 w-9 ml-3"
+              class="h-4 w-7 sm:h-5 sm:w-9 ml-1 sm:ml-3"
               style="display: inline"
           /></a>
         </div>
       </div>
     </div>
-
     <!-- Стрелки и страницы -->
-    <div class="mx-[150px] mt-14 mb-28">
+    <div class="mx-[30px] sm:mx-[100px] xl:mx-[150px] mt-14 mb-28">
       <div class="flex justify-end space-x-4 text-blue text-xl items-center">
-        <span class="text-text text-lg">Страницы</span>
+        <span class="text-text text-base md:text-lg">Страницы</span>
         <button>
           <svg
-            class="h-6 w-6 fill-current text-blue transition-colors duration-300 hover:text-blue-button"
+            class="h-5 w-5 sm:h-6 sm:w-6 fill-current text-blue transition-colors duration-300 hover:text-blue-button cursor-pointer"
             viewBox="0 0 35 35"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -481,12 +553,12 @@
             />
           </svg>
         </button>
-        <button><span>1</span></button>
-        <button><span class="font-bold">2</span></button>
-        <button><span>3</span></button>
+        <button><span class="text-base md:text-lg">1</span></button>
+        <button><span class="text-base md:text-lg font-bold">2</span></button>
+        <button><span class="text-base md:text-lg">3</span></button>
         <button>
           <svg
-            class="h-6 w-6 fill-current text-blue transition-colors duration-300 hover:text-blue-button"
+            class="h-5 w-5 sm:h-6 sm:w-6 fill-current text-blue transition-colors duration-300 hover:text-blue-button cursor-pointer"
             viewBox="0 0 35 35"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -503,13 +575,15 @@
     <footer
       class="bg-blue-button w-full flex flex-col items-center justify-center py-10 sm:py-12 md:py-16 lg:py-20 xl:py-24 2xl:py-26"
     >
-      <div class="flex justify-between items-center w-[78%] max-w-screen-xl">
-        <div class="flex space-x-4 mr-14">
+      <div
+        class="flex justify-between items-center w-[90%] max-w-screen-xl flex-col sm:flex-row md:flex-row lg:flex-row xl:flex-row 2xl:flex-row"
+      >
+        <div class="flex space-x-4 mr-0 sm:mr-12 mb-6 sm:mb-0">
           <img src="accets/logo.svg" alt="Логотип ЭНСА" />
           <span class="text-2xl font-bold text-white">ЭНСА</span>
         </div>
         <div
-          class="flex items-center space-x-8 hidden sm:hidden md:hidden xl:flex 2xl:flex lg:flex"
+          class="items-center space-x-8 hidden xl:flex"
         >
           <a href="#" class="text-lg text-white">О предприятии</a>
           <a href="#" class="text-lg text-white">Тарифы</a>
@@ -525,15 +599,19 @@
             <span>Войти</span>
           </button>
           <button
-            class="bg-blue-button text-white px-4 py-2 rounded-2xl text-lg flex items-center"
+            id="mailButton"
+            class="bg-blue-button text-white px-4 py-2 items-center"
+            onclick="openEmailModal()"
           >
             <img src="accets/mail.svg" alt="Почта" class="h-6 w-6 mr-4" />
-            <span>dm.5265@mail.ru</span>
           </button>
+          <a href="mailto:dm.5265@mail.ru" class="text-white text-lg"
+            >dm.5265@mail.ru</a
+          >
         </div>
       </div>
       <p
-        class="text-white text-base mt-10 mx-16 sm:mx-16 md:mx-20 lg:mx-24 xl:mx-28 2xl:mx-40"
+        class="text-white text-center text-base mt-10 mx-16 sm:mx-16 md:mx-20 lg:mx-24 xl:mx-28 2xl:mx-40"
       >
         Продолжая использовать наш сайт, Вы даете согласие на обработку файлов
         Cookies, в соответствии с
